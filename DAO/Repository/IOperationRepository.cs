@@ -2,7 +2,7 @@
 
 namespace DAO.Repository
 {
-    interface IOperationRepository : IRepository<Operation>
+    public interface IOperationRepository : IRepository<Operation>
     {
     }
 }

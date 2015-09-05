@@ -2,7 +2,7 @@
 
 namespace DAO.Repository
 {
-    interface ICardRepository : IRepository<Card>
+    public interface ICardRepository : IRepository<Card>
     {
     }
 }

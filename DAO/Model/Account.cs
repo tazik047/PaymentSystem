@@ -7,7 +7,7 @@ namespace DAO.Model
 {
     public class Account
     {
-        public long AcountId { get; set; }
+        public long AccountId { get; set; }
         public DateTime CreationDate { get; set; }
         public float Balance { get; set; }
         public bool IsBlocked { get; set; }

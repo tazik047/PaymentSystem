@@ -9,8 +9,8 @@ namespace DAO.Repository
         void Edit(T item);
         void Delete(long id);
         
-        List<T> GetAll();
-        List<T> GetFirtNItem(int n);
+        List<T> Get();
+        List<T> Get(int skip, int take);
         T FindById(long id);
 
         List<T> Find(Func<T, bool> predicate);

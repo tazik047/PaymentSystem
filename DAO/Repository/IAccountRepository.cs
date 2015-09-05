@@ -2,7 +2,7 @@
 
 namespace DAO.Repository
 {
-    interface IAccountRepository : IRepository<Account>
+    public interface IAccountRepository : IRepository<Account>
     {
     }
 }

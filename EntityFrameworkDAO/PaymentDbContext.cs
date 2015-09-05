@@ -11,10 +11,8 @@ namespace EntityFrameworkDAO
 {
     class PaymentDbContext : DbContext
     {
-        public static readonly  PaymentDbContext Instance = new PaymentDbContext();
-
-        public PaymentDbContext()
-            : base("PaymentDbContext")
+        public PaymentDbContext(string connectionString)
+            : base(connectionString)
         {
             Database.SetInitializer(new PaymentDbInitializer());
         }
@@ -22,6 +20,6 @@ namespace EntityFrameworkDAO
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Operation> Operations { get; set; }
-        public DbSet<User> Users { get; set; } 
+        //public DbSet<User> Users { get; set; } 
     }
 }

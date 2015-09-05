@@ -49,6 +49,7 @@
     <Compile Include="Repository\ICardRepository.cs" />
     <Compile Include="Repository\IOperationRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IRepositoryFactory.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup />

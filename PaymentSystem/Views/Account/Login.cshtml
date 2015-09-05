@@ -1,9 +1,9 @@
 ﻿@using PaymentSystem.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Выполнить вход";
+    Layout = null;
 }
-
+<!--
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">
@@ -57,7 +57,84 @@
         </section>
     </div>
 </div>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Вход в личный кабинет</title>
 
-@section Scripts {
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-}
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/backstretch")
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+
+    <div id="login-page">
+        <div class="container">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-login" }))
+            {
+                <h2 class="form-login-heading">Вход</h2>
+                <div class="login-wrap">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Email), autofocus = "" })
+                    <br>
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Password) })
+                    <label class="checkbox">
+                        <span class="pull-right">
+                            <a data-toggle="modal" href="#myModal"> Забыли пароль?</a>
+
+                        </span>
+                    </label>
+                    <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> ВОЙТИ</button>
+                    <hr>
+                    <div class="registration">
+                       Еще нет аккаунта?<br />
+                        <a class="" href="#">
+                            Создать аккаунт
+                        </a>
+                    </div>
+                </div>
+
+            <!-- Modal -->
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Забыли пароль ?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Введит Ваш e-mail для того, чтобы восстановить пароль.</p>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control placeholder-no-fix", placeholder = Html.DisplayNameFor(model => model.Email), autocomplete = "off" })
+                            </div>
+                            <div class="modal-footer">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">Отмена</button>
+                                <button class="btn btn-theme" type="button">Отправить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- modal -->
+            }
+
+        </div>
+    </div>
+    <script>
+        $.backstretch("/img/login-bg.jpg", { speed: 500 });
+    </script>
+</body>
+</html>
