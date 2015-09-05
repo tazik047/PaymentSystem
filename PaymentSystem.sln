@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentSystem", "PaymentSystem\PaymentSystem.csproj", "{0AFEB0FC-406D-4086-B2C1-396FFCE268D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{4C04758B-4E67-48B5-939D-5189AE378858}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkDAO", "EntityFrameworkDAO\EntityFrameworkDAO.csproj", "{B3AE425C-724A-4E4B-896C-50B2620B8BDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AFEB0FC-406D-4086-B2C1-396FFCE268D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFEB0FC-406D-4086-B2C1-396FFCE268D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFEB0FC-406D-4086-B2C1-396FFCE268D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFEB0FC-406D-4086-B2C1-396FFCE268D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C04758B-4E67-48B5-939D-5189AE378858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C04758B-4E67-48B5-939D-5189AE378858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C04758B-4E67-48B5-939D-5189AE378858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C04758B-4E67-48B5-939D-5189AE378858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AE425C-724A-4E4B-896C-50B2620B8BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AE425C-724A-4E4B-896C-50B2620B8BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AE425C-724A-4E4B-896C-50B2620B8BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AE425C-724A-4E4B-896C-50B2620B8BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
