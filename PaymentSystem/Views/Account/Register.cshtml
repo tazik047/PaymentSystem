@@ -1,8 +1,9 @@
 ﻿@model PaymentSystem.Models.RegisterViewModel
 @{
     ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
-
+<!--
 <h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -34,8 +35,38 @@
             <input type="submit" class="btn btn-default" value="Регистрация" />
         </div>
     </div>
-}
+}-->
+<div id="login-page">
+    <div class="container">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-login form-horizontal" }))
+        {
+            <h2 class="form-login-heading">Регистрация</h2>
+            <div class="login-wrap">
+                @Html.AntiForgeryToken()
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Email), autofocus = "" })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <br>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Password) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.ConfirmPassword) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> Забыли пароль?</a>
+                </span>
+                <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-user-plus"></i>Регистрация</button>
+            </div>
+        }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    </div>
+</div>

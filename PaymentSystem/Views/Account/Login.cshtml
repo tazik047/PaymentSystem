@@ -1,140 +1,68 @@
 ﻿@using PaymentSystem.Models
 @model LoginViewModel
 @{
-    Layout = null;
+    ViewBag.Title = "Вход в личный кабинет";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
-<!--
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+<div id="login-page">
+    <div class="container">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-login form-horizontal" }))
+        {
+            <h2 class="form-login-heading">Вход</h2>
+            <div class="login-wrap">
                 @Html.AntiForgeryToken()
-                <h4>Используйте локальную учетную запись для входа.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Email), autofocus = "" })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                <br>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Password) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <div class="checkbox">
+                    @Html.LabelFor(model => model.RememberMe, new { @class = "col-md-offset-1" })
+                    <div class="switch switch-square" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+                            @Html.CheckBoxFor(model => model.RememberMe)
                         </div>
-                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Выполнить вход" class="btn btn-default" />
-                    </div>
+                <br />
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> Забыли пароль?</a>
+                </span>
+                <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> ВОЙТИ</button>
+                <hr>
+                <div class="registration">
+                    Еще нет аккаунта?<br />
+                    @Html.ActionLink("Создать аккаунт", "Register")
                 </div>
-                <p>
-                    @Html.ActionLink("Регистрация нового пользователя", "Register")
-                </p>
-                @* Включите, когда будет включено подтверждение учетной записи для функции сброса пароля
-                    <p>
-                        @Html.ActionLink("Забыли пароль?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
--->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Вход в личный кабинет</title>
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/backstretch")
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-
-    <!-- **********************************************************************************************************************************************************
-    MAIN CONTENT
-    *********************************************************************************************************************************************************** -->
-
-    <div id="login-page">
-        <div class="container">
-            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-login" }))
-            {
-                <h2 class="form-login-heading">Вход</h2>
-                <div class="login-wrap">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Email), autofocus = "" })
-                    <br>
-                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Password) })
-                    <label class="checkbox">
-                        <span class="pull-right">
-                            <a data-toggle="modal" href="#myModal"> Забыли пароль?</a>
-
-                        </span>
-                    </label>
-                    <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> ВОЙТИ</button>
-                    <hr>
-                    <div class="registration">
-                       Еще нет аккаунта?<br />
-                        <a class="" href="#">
-                            Создать аккаунт
-                        </a>
-                    </div>
-                </div>
+            </div>
 
             <!-- Modal -->
-                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Забыли пароль ?</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Введит Ваш e-mail для того, чтобы восстановить пароль.</p>
-                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control placeholder-no-fix", placeholder = Html.DisplayNameFor(model => model.Email), autocomplete = "off" })
-                            </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Отмена</button>
-                                <button class="btn btn-theme" type="button">Отправить</button>
-                            </div>
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Забыли пароль ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Введит Ваш e-mail для того, чтобы восстановить пароль.</p>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control placeholder-no-fix", placeholder = Html.DisplayNameFor(model => model.Email), autocomplete = "off" })
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Отмена</button>
+                            <button class="btn btn-theme" type="button">Отправить</button>
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- modal -->
-            }
+        }
 
-        </div>
     </div>
-    <script>
-        $.backstretch("/img/login-bg.jpg", { speed: 500 });
-    </script>
-</body>
-</html>
+</div>

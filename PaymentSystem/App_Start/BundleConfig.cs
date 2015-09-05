@@ -9,7 +9,8 @@ namespace PaymentSystem
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-1.9.2.custom.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/backstretch").Include(
                                     "~/Scripts/jquery.backstretch.min.js"));
@@ -39,12 +40,25 @@ namespace PaymentSystem
                     "~/Scripts/chart-master/Chart.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/chart").Include(
+                    "~/Scripts/chart-master/Chart.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/font-awesome/css/font-awesome.css",
                       "~/Content/style.css",
                       "~/Content/style-reponsive.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/form").Include(
+                    "~/Scripts/form-component.js",
+                    "~/Scripts/bootstrap-switch.js",
+                    "~/Scripts/jquery.tagsinput.js",
+                    "~/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                    "~/Scripts/bootstrap-daterangepicker/daterangepicker.js",
+                    "~/Scripts/bootstrap-inputmask/bootstrap-inputmask.min.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/others").Include(
                 "~/Content/zabuto_calendar.css",
