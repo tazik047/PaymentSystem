@@ -20,6 +20,17 @@ namespace EntityFrameworkDAO
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Operation> Operations { get; set; }
+        public DbSet<BankOperation> BankOperations { get; set; }
+        public DbSet<BankOperation> CardOperations { get; set; }
+        public DbSet<MobileOperation> MobileOperations { get; set; }
         //public DbSet<User> Users { get; set; } 
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Operation>().ToTable("Operations");
+            modelBuilder.Entity<BankOperation>().ToTable("BankOperations");
+            modelBuilder.Entity<BankOperation>().ToTable("BankOperations");
+            modelBuilder.Entity<MobileOperation>().ToTable("MobileOperations");
+        }
     }
 }

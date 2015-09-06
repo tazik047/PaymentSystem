@@ -33,7 +33,7 @@ namespace EntityFrameworkDAO.Repository
         public void Delete(long id)
         {
             var item = FindById(id);
-            if(item== null) return;
+            if (item == null) return;
             _db.Operations.Remove(item);
             _db.SaveChanges();
         }
@@ -56,6 +56,28 @@ namespace EntityFrameworkDAO.Repository
         public List<Operation> Find(Func<Operation, bool> predicate)
         {
             return Get().Where(predicate).ToList();
+        }
+
+        public List<T> Get<T>() where T : Operation
+        {
+            var currnetType = typeof(T).Name;
+            if (currnetType == typeof(BankOperation).Name)
+            {
+                return _db.BankOperations.Cast<T>().ToList<T>();
+            }
+            if (currnetType == typeof(CardOperation).Name)
+            {
+                return _db.CardOperations.Cast<T>().ToList<T>();
+            }
+            if (currnetType == typeof(MobileOperation).Name)
+            {
+                return _db.MobileOperations.Cast<T>().ToList<T>();
+            }
+            if (currnetType == typeof(Operation).Name)
+            {
+                return _db.Operations.Cast<T>().ToList<T>();
+            }
+            return Enumerable.Empty<T>().ToList();
         }
     }
 }
