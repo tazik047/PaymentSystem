@@ -13,6 +13,7 @@ namespace DAO.Model
         public string FullName { get; set; }
         public DateTime ExpirationDate { get; set; }
         public int Ccv { get; set; }
+        public string Name { get; set; }
 
         public long AccountId { get; set; }
         public virtual Account Accounts { get; set; } 
