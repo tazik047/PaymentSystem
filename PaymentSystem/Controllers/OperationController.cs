@@ -14,17 +14,32 @@ namespace PaymentSystem.Controllers
             return View();
         }
 
-        public ActionResult Prepared()
+        public ActionResult CreatePayment()
         {
             return View();
         }
 
-        public ActionResult Payment()
+        public ActionResult CreateReplenishment()
         {
             return View();
         }
 
-        public ActionResult Replenishment()
+        public ActionResult CreatePreparedPayment()
+        {
+            return View();
+        }
+
+        public ActionResult PreparedPayments()
+        {
+            return View();
+        }
+
+        public ActionResult Payments()
+        {
+            return View();
+        }
+
+        public ActionResult Replenishments()
         {
             return View();
         }

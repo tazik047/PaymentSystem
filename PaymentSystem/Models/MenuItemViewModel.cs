@@ -9,12 +9,15 @@ namespace PaymentSystem.Models
     {
         public string Title { get; set; }
         public string Link { get; set; }
+        public string FontAwesomeIcon { get; set; }
         public MenuItemViewModel[] Items { get; set; }
+        
 
-        public MenuItemViewModel(string title, string link, params MenuItemViewModel[] items)
+        public MenuItemViewModel(string title, string link, string icon, params MenuItemViewModel[] items)
         {
             Title = title;
             Link = link;
+            FontAwesomeIcon = icon;
             Items = items;
         }
     }

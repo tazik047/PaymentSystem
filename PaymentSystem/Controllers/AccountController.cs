@@ -403,6 +403,30 @@ namespace PaymentSystem.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult Block(long? userId)
+        {
+            //UserManager.SetLockoutEnabledAsync()
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult UnBlock(long? userId)
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AllUsers()
+        {
+            return View();
+        }
+
+        public ActionResult AllBlockedUsers()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

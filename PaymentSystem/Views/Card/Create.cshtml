@@ -1,0 +1,91 @@
+﻿@model DAO.Model.Card
+
+@{
+    ViewBag.Title = "Новая карта";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Creare", "Card", FormMethod.Post, new { @class = "card-form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-offset-3 col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", } })
+                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-offset-3 col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpirationDate, htmlAttributes: new { @class = "control-label col-md-offset-3 col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.ExpirationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cvc, htmlAttributes: new { @class = "control-label col-md-offset-3 col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Cvc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cvc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-offset-3 col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group card-wrapper">
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-6">
+                <input type="submit" value="Создать" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.card.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('form.card-form').card({
+                container: '.card-wrapper',
+                formSelectors: {
+                    numberInput: 'input[name="Number"]',
+                    expiryInput: 'input[name="ExpirationDate"]',
+                    cvcInput: 'input[name="Cvc"]',
+                    nameInput: 'input[name="FullName"]'
+                },
+
+                placeholders: {
+                    number: '**** **** **** ****',
+                    name: 'Иван Иванов',
+                    expiry: '**/****',
+                    cvc: '***'
+                }
+            });
+        });
+    </script>
+}
