@@ -24,7 +24,6 @@ namespace EntityFrameworkDAO
         public DbSet<BankOperation> BankOperations { get; set; }
         public DbSet<CardOperation> CardOperations { get; set; }
         public DbSet<MobileOperation> MobileOperations { get; set; }
-        //public DbSet<User> Users { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,12 +31,10 @@ namespace EntityFrameworkDAO
             modelBuilder.Entity<BankOperation>().ToTable("BankOperations");
             modelBuilder.Entity<CardOperation>().ToTable("CardOperations");
             modelBuilder.Entity<MobileOperation>().ToTable("MobileOperations");
+            modelBuilder.Entity<Card>()
+                .HasRequired<Account>(c => c.Account)
+                .WithRequiredDependent(a => a.Card);
             base.OnModelCreating(modelBuilder);
         }
-
-        /*public static PaymentDbContext Create()
-        {
-            return new PaymentDbContext();
-        }*/
     }
 }
