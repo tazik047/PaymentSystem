@@ -234,10 +234,13 @@
     <Content Include="Views\Shared\UserProfilePartial.cshtml" />
     <Content Include="Views\Menu\_Menu.cshtml" />
     <Content Include="Views\Card\Create.cshtml" />
+    <Content Include="Views\Operation\CreatePayment.cshtml" />
+    <Content Include="Views\Operation\CreateBankOperation.cshtml" />
+    <Content Include="Views\Operation\CreateCardOperation.cshtml" />
+    <Content Include="Views\Operation\CreateMobileOperation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Operation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

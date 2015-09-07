@@ -19,6 +19,21 @@ namespace PaymentSystem.Controllers
             return View();
         }
 
+        public PartialViewResult CreateBankOperation()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult CreateCardOperation()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult CreateMobileOperation()
+        {
+            return PartialView();
+        }
+
         public ActionResult CreateReplenishment()
         {
             return View();
