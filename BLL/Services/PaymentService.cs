@@ -44,10 +44,22 @@ namespace BLL.Services
         public static void AcceptPreparedPayment(long operationId, IRepositoryFactory factory)
         {
             var operation = factory.OperationRepository.FindById(operationId);
-            if(operation.Type!=OperationType.PreparedPayment)
+            if (operation.Type != OperationType.PreparedPayment)
                 throw new ValidationException("Этот платеж невозможно подтвердить.");
             operation.Type = OperationType.Paymnet;
             factory.OperationRepository.Edit(operation);
+            if (typeof(CardOperation) == operation.GetType())
+            {
+                var card = factory.CardRepository.Find(c => c.Number.Equals(operation.CardNumber)).FirstOrDefault();
+                if (card != null)
+                {
+                    var replenishmentOperation = new CardOperation
+                    {
+                        Amount = operation.Amount
+                    };
+                    ReplenishAccount(card.Account, replenishmentOperation, factory);
+                }
+            }
         }
 
         private static void Payment(Account account, Operation operation, IRepositoryFactory factory)
@@ -59,7 +71,5 @@ namespace BLL.Services
             account.Operations.Add(operation);
             factory.AccountRepository.Edit(account);
         }
-
-
     }
 }

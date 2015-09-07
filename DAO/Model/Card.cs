@@ -16,6 +16,6 @@ namespace DAO.Model
         public string Name { get; set; }
 
         public long AccountId { get; set; }
-        public virtual Account Accounts { get; set; } 
+        public virtual Account Account { get; set; } 
     }
 }
