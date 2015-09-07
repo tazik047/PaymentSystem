@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EntityFrameworkDAO
 {
-    class PaymentDbContext : DbContext
+    class PaymentDbContext : IdentityDbContext<User>
     {
         public PaymentDbContext(string connectionString)
             : base(connectionString)
@@ -21,7 +22,7 @@ namespace EntityFrameworkDAO
         public DbSet<Card> Cards { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<BankOperation> BankOperations { get; set; }
-        public DbSet<BankOperation> CardOperations { get; set; }
+        public DbSet<CardOperation> CardOperations { get; set; }
         public DbSet<MobileOperation> MobileOperations { get; set; }
         //public DbSet<User> Users { get; set; } 
 
@@ -29,8 +30,14 @@ namespace EntityFrameworkDAO
         {
             modelBuilder.Entity<Operation>().ToTable("Operations");
             modelBuilder.Entity<BankOperation>().ToTable("BankOperations");
-            modelBuilder.Entity<BankOperation>().ToTable("BankOperations");
+            modelBuilder.Entity<CardOperation>().ToTable("CardOperations");
             modelBuilder.Entity<MobileOperation>().ToTable("MobileOperations");
+            base.OnModelCreating(modelBuilder);
         }
+
+        /*public static PaymentDbContext Create()
+        {
+            return new PaymentDbContext();
+        }*/
     }
 }

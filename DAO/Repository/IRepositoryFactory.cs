@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Owin;
 
 namespace DAO.Repository
 {
@@ -11,5 +12,7 @@ namespace DAO.Repository
         IAccountRepository AccountRepository { get; }
         ICardRepository CardRepository { get; }
         IOperationRepository OperationRepository { get; }
+
+        void ConfigAuthorization(IAppBuilder app);
     }
 }

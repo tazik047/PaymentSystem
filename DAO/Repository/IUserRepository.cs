@@ -1,8 +1,12 @@
 ﻿using DAO.Model;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace DAO.Repository
 {
-    interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<User>
     {
+        UserManager<User> UserManager { get; }
+        SignInManager<User, string> SignInManager { get; }
     }
 }

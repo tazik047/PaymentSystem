@@ -48,9 +48,10 @@ namespace BLL.Services
                 throw new ValidationException("Этот платеж невозможно подтвердить.");
             operation.Type = OperationType.Paymnet;
             factory.OperationRepository.Edit(operation);
-            if (typeof(CardOperation) == operation.GetType())
+            if (operation is CardOperation)
             {
-                var card = factory.CardRepository.Find(c => c.Number.Equals(operation.CardNumber)).FirstOrDefault();
+                var cOperation = operation as CardOperation;
+                var card = factory.CardRepository.Find(c => c.Number.Equals(cOperation.CardNumber)).FirstOrDefault();
                 if (card != null)
                 {
                     var replenishmentOperation = new CardOperation

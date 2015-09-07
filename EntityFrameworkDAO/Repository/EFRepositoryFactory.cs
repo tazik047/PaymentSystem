@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO.Repository;
+using EntityFrameworkDAO.Identity;
+using Owin;
 
 namespace EntityFrameworkDAO.Repository
 {
-    class EFRepositoryFactory : IRepositoryFactory
+    public class EFRepositoryFactory : IRepositoryFactory
     {
         private readonly PaymentDbContext _context;
 
@@ -38,6 +40,14 @@ namespace EntityFrameworkDAO.Repository
         public EFRepositoryFactory(string connectionName)
         {
             _context = new PaymentDbContext(connectionName);
+        }
+
+
+        public void ConfigAuthorization(IAppBuilder app)
+        {
+            app.CreatePerOwinContext(() => _context);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
         }
     }
 }

@@ -13,7 +13,7 @@ using Microsoft.Owin.Security;
 using PaymentSystem.Models;
 
 namespace PaymentSystem
-{
+{/*
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
@@ -105,5 +105,5 @@ namespace PaymentSystem
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
-    }
+    }*/
 }
