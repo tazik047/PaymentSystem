@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\CardService.cs" />
     <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\SortType.cs" />
     <Compile Include="ValidationException.cs" />

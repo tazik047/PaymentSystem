@@ -19,3 +19,7 @@
 .switch-square {
     vertical-align: middle;
 }
+
+#no-more-tables tbody tr {
+    cursor: pointer;
+}

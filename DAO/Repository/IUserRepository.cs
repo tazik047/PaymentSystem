@@ -1,4 +1,5 @@
-﻿using DAO.Model;
+﻿using System.Collections.Generic;
+using DAO.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -6,7 +7,10 @@ namespace DAO.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-        UserManager<User> UserManager { get; }
-        SignInManager<User, string> SignInManager { get; }
+        void Add(User item, string password, string role="User");
+        void Delete(string id);
+        User FindById(string id);
+        List<User> Get(string role);
+        void SetLock(string id, bool block);
     }
 }

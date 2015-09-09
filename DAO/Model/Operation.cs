@@ -9,7 +9,7 @@ namespace DAO.Model
     {
         public long OperationId { get; set; }
         public DateTime OperationDate { get; set; }
-        public float Amount { get; set; }
+        public double Amount { get; set; }
         public OperationType Type { get; set; }
 
         public long AccountId { get; set; }

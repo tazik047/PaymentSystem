@@ -31,5 +31,18 @@ namespace BLL.Services
         {
             return OrderAccountsByField(repository, order, a => a.Balance);
         }
+
+        public static List<Account> GetAllAccounts(IRepositoryFactory factory, string userId)
+        {
+            return factory.AccountRepository.Find(a => a.UserId.Equals(userId));
+        }
+
+        public static Account GetAccount(IRepositoryFactory factory, long id, string userId, bool needCheckUserId)
+        {
+            var account = factory.AccountRepository.FindById(id);
+            if ((account == null) || (needCheckUserId && account.UserId != userId))
+                return null;
+            return account;
+        }
     }
 }

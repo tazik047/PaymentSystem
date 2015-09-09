@@ -49,7 +49,8 @@ namespace PaymentSystem
                       "~/Content/site.css",
                       "~/font-awesome/css/font-awesome.css",
                       "~/Content/style.css",
-                      "~/Content/style-reponsive.css"));
+                      "~/Content/style-reponsive.css",
+                      "~/Content/table-responsive.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                     "~/Scripts/form-component.js",

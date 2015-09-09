@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAO.Model;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Owin;
 
 namespace DAO.Repository
@@ -12,6 +16,7 @@ namespace DAO.Repository
         IAccountRepository AccountRepository { get; }
         ICardRepository CardRepository { get; }
         IOperationRepository OperationRepository { get; }
+        IUserRepository GetUserRepository(UserManager<User> userManager);
 
         void ConfigAuthorization(IAppBuilder app);
     }

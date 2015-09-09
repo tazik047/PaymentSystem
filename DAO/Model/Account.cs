@@ -9,7 +9,7 @@ namespace DAO.Model
     {
         public long AccountId { get; set; }
         public DateTime CreationDate { get; set; }
-        public float Balance { get; set; }
+        public double Balance { get; set; }
         public bool IsBlocked { get; set; }
         public ICollection<Operation> Operations { get; set; }
         public string UserId { get; set; }

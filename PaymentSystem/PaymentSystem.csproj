@@ -169,7 +169,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -255,6 +254,11 @@
     <Content Include="Views\Operation\CreateCardOperation.cshtml" />
     <Content Include="Views\Operation\CreateMobileOperation.cshtml" />
     <Content Include="Views\Operation\CreateReplenishment.cshtml" />
+    <Content Include="Views\Account\AllUsers.cshtml" />
+    <Content Include="Views\Manage\Details.cshtml" />
+    <Content Include="Views\Shared\_AccountsPartial.cshtml" />
+    <Content Include="Views\Card\Index.cshtml" />
+    <Content Include="Views\Card\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -267,6 +271,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{ed868f3b-d0f2-48d1-ad54-52138b7aba5b}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{4c04758b-4e67-48b5-939d-5189ae378858}</Project>
       <Name>DAO</Name>

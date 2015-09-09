@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAO.Model;
 using DAO.Repository;
 using EntityFrameworkDAO.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Owin;
 
 namespace EntityFrameworkDAO.Repository
@@ -36,6 +40,10 @@ namespace EntityFrameworkDAO.Repository
                 return new OperationRepository(_context);
             }
         }
+        public IUserRepository GetUserRepository(UserManager<User> userManager)
+        {
+            return new UserRepository(_context, (ApplicationUserManager) userManager);
+        }
 
         public EFRepositoryFactory(string connectionName)
         {
@@ -48,7 +56,8 @@ namespace EntityFrameworkDAO.Repository
             app.CreatePerOwinContext(() => _context);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
         }
+
+        
     }
 }

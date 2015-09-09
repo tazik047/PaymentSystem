@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DAO.Model.Account>
+<section id="no-more-tables">
+    <table class="table table-bordered table-hover table-striped table-condensed cf">
+        <thead class="cf">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Card.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Balance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreationDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr onclick="location.href = '@Url.Action("Details", new {Controller = "Card", id = item.Card.CardId})'"
+                    @if (item.IsBlocked) { @: class="blocked" title="Карта заблокирована"
+                                        }>
+                    <td data-title="@Html.DisplayNameFor(model => model.Card.Name)">
+                        @Html.DisplayFor(modelItem => item.Card.Name)
+                    </td>
+                    <td data-title="@Html.DisplayNameFor(model => model.Balance)">
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    <td data-title="@Html.DisplayNameFor(model => model.CreationDate)">
+                        @Html.DisplayFor(modelItem => item.CreationDate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</section>

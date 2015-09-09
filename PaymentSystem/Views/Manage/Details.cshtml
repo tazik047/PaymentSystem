@@ -1,0 +1,48 @@
+﻿@model DAO.Model.User
+
+@{
+    ViewBag.Title = "Информация о пользователе";
+}
+
+<h2>Информация о пользователе</h2>
+
+<div>
+    <h4>@Model.UserName</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+    @if (User.IsInRole("Admin") || User.IsInRole("Support"))
+    {
+        <div>
+            <h2>Все счета</h2>
+            @Html.Partial("_AccountsPartial", Model.Accounts)
+        </div>
+    }
+</div>
+<p>
+    @if (User.Identity.Name == Model.UserName)
+    {
+        @Html.ActionLink("Редактировать данный", "Edit")
+    }
+</p>
