@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace EntityFrameworkDAO
 {
-    class PaymentDbInitializer : DropCreateDatabaseAlways<PaymentDbContext>
+    class PaymentDbInitializer : DropCreateDatabaseIfModelChanges<PaymentDbContext>
     {
 
         protected override void Seed(PaymentDbContext context)
@@ -71,6 +71,7 @@ namespace EntityFrameworkDAO
                 CheckResult(userManager.AddToRole(users[i].Id, "User"));
             context.SaveChanges();
 
+            // Create accounts for users.
             var accounts = new[]
             {
                 new Account

@@ -18,8 +18,8 @@
             @foreach (var item in Model)
             {
                 <tr onclick="location.href = '@Url.Action("Details", new {Controller = "Card", id = item.Card.CardId})'"
-                    @if (item.IsBlocked) { @: class="blocked" title="Карта заблокирована"
-                                        }>
+                    @if (item.IsBlocked) { @: class="alert alert-danger" title="Карта заблокирована"
+                                                            }>
                     <td data-title="@Html.DisplayNameFor(model => model.Card.Name)">
                         @Html.DisplayFor(modelItem => item.Card.Name)
                     </td>

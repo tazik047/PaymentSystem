@@ -11,7 +11,7 @@ namespace DAO.Model
         public DateTime CreationDate { get; set; }
         public double Balance { get; set; }
         public bool IsBlocked { get; set; }
-        public ICollection<Operation> Operations { get; set; }
+        public virtual ICollection<Operation> Operations { get; set; }
         public string UserId { get; set; }
         public virtual User User { get; set; }
         public long CardId { get; set; }

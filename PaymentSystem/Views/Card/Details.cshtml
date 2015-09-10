@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.AccountId = Model.AccountId;
 }
 
 <h2>Details</h2>
@@ -48,7 +49,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.CardId)
-        </dd>
-
+        </dd>        
     </dl>
+    @Html.Partial("_OperationsPartial", Model.Operations)
 </div>

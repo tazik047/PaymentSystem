@@ -37,7 +37,8 @@ namespace PaymentSystem
                     "~/Scripts/gritter-conf.js",
                     "~/Scripts/sparkline-chart.js",
                     "~/Scripts/zabuto_calendar.js",
-                    "~/Scripts/chart-master/Chart.js"
+                    "~/Scripts/chart-master/Chart.js",
+                    "~/Scripts/bootstrap-table.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
@@ -50,7 +51,8 @@ namespace PaymentSystem
                       "~/font-awesome/css/font-awesome.css",
                       "~/Content/style.css",
                       "~/Content/style-reponsive.css",
-                      "~/Content/table-responsive.css"));
+                      "~/Content/table-responsive.css",
+                      "~/Content/bootstrap-table.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                     "~/Scripts/form-component.js",
