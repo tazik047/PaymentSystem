@@ -11,7 +11,7 @@ namespace BLL.Services
     public static class AccountService
     {
         //todo: Need find only user's account.
-        private static List<Account> OrderAccountsByField<T>(IAccountRepository repository, SortType order, Func<Account,T> field)
+        private static List<Account> OrderAccountsByField<T>(IAccountRepository repository, SortType order, Func<Account, T> field)
         {
             var result = repository.Get().OrderBy(field);
             return order == SortType.Descending ? result.Reverse().ToList() : result.ToList();
@@ -32,9 +32,17 @@ namespace BLL.Services
             return OrderAccountsByField(repository, order, a => a.Balance);
         }
 
-        public static List<Account> GetAllAccounts(IRepositoryFactory factory, string userId)
+        public static object GetAllAccounts(IRepositoryFactory factory, string userId)
         {
-            return factory.AccountRepository.Find(a => a.UserId.Equals(userId));
+            return factory.AccountRepository.Find(a => a.UserId.Equals(userId))
+                .Select(a => new
+                {
+                    Id = a.Card.CardId, 
+                    a.Card.Name,
+                    CreationDate = a.CreationDate.ToShortDateString(), 
+                    a.Balance,
+                    a.IsBlocked
+                });
         }
 
         public static Account GetAccount(IRepositoryFactory factory, long id, string userId, bool needCheckUserId)

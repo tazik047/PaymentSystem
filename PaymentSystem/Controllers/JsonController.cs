@@ -17,12 +17,20 @@ namespace PaymentSystem.Controllers
             _factory = factory;
         }
 
-        public ActionResult Operations(long id)
+        public ActionResult Operations(long id = 0)
         {
             var operations = OperationServices.Operations(_factory, id, User.Identity.GetUserId(), User.IsInRole("User"));
             if (operations == null)
                 return new HttpNotFoundResult();
             return Json(operations, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Accounts(long userId = 0)
+        {
+            var accounts = AccountService.GetAllAccounts(_factory, User.Identity.GetUserId());
+            if (accounts == null)
+                return new HttpNotFoundResult();
+            return Json(accounts, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,4 +1,22 @@
 ﻿@model IEnumerable<DAO.Model.Account>
+<div class="col-md-12">
+    <h2>Операции</h2>
+    <table id="bootstrap-table" data-url="@Url.Action("Accounts", "Json")"
+           data-pagination="true" data-search="true"
+           data-show-refresh="true" data-show-toggle="true"
+           data-row-style="accountIsBlocked"
+           click-href="@Url.Action("Details", "Card")">
+        <thead>
+        <tr>
+            <th data-field="Name" data-sortable="true">@Html.DisplayNameFor(model => model.Card.Name)</th>
+            <th data-field="Balance" data-sortable="true">@Html.DisplayNameFor(model => model.Balance)</th>
+            <th data-field="CreationDate" data-sortable="true">@Html.DisplayNameFor(model => model.CreationDate)</th>
+            <th data-field="Id" data-visible="false"></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<!--
 <section id="no-more-tables">
     <table class="table table-bordered table-hover table-striped table-condensed cf">
         <thead class="cf">
@@ -34,4 +52,4 @@
         </tbody>
     </table>
 
-</section>
+</section>-->

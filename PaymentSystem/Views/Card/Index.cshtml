@@ -1,9 +1,7 @@
-﻿@model IEnumerable<DAO.Model.Account>
-
-@{
+﻿@{
     ViewBag.Title = "Все карты";
 }
 
 <h2>Все карты</h2>
 
-@Html.Partial("_AccountsPartial", Model)
+@Html.Partial("_AccountsPartial", Enumerable.Empty<DAO.Model.Account>())
