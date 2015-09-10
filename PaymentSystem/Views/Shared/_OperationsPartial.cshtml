@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<DAO.Model.Operation>
-
 <div class="col-md-12">
     <h2>Операции</h2>
-    <table id="bootstrap-table" data-url="@Url.Action("Operations", new { Controller="Json", id = ViewBag.AccountId})" 
-           data-height="500" data-pagination="true" data-search="true">
+    <table id="bootstrap-table" data-url="@Url.Action("Operations", new { Controller="Json", id = ViewBag.AccountId})"
+           data-pagination="true" data-search="true"
+           data-show-refresh="true" data-show-toggle="true"
+           click-href="@Url.Action("Details","Operation")">
         <thead>
             <tr>
                 <th data-field="OperationDate" data-sortable="true">@Html.DisplayNameFor(model => model.OperationDate)</th>
@@ -14,43 +15,3 @@
         </thead>
     </table>
 </div>
-
-<!--
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountId)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccountId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OperationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OperationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OperationId })
-        </td>
-    </tr>
-}
-
-</table>
-    -->

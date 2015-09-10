@@ -58,5 +58,10 @@ namespace PaymentSystem.Controllers
         {
             return View();
         }
+
+        public ActionResult Details(long id = 0)
+        {
+            return View();
+        }
     }
 }

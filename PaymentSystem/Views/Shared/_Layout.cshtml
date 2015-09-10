@@ -476,8 +476,6 @@ RenderSection("scripts", required: false)
                 selected = selected.add(selected.parent().prev());
             }
             selected.addClass('active');
-
-            $('#bootstrap-table').bootstrapTable();
         });
 
 
@@ -488,8 +486,7 @@ RenderSection("scripts", required: false)
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     </script>
-
-
+    <script src="~/Scripts/Custom.js"></script>
 
 </body>
 </html>

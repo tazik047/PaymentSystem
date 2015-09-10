@@ -19,7 +19,7 @@ namespace BLL.Services
                 OperationDate = o.OperationDate.ToShortDateString(),
                 o.Amount,
                 Type = o.Type.GetDescription(),
-                o.OperationId
+                Id = o.OperationId
             }).ToList();
         }
     }
