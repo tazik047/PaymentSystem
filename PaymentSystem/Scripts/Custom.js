@@ -1,6 +1,8 @@
 ﻿function accountIsBlocked(row, index) {
     console.log(row);
-    return {classes: (row.isBlocked ? 'alert alert-danger' : 'false')};
+    if (row.IsBlocked)
+        return { class: 'alert-danger', title: 'Карта заблокирована' }
+    return {};
 }
 
 function createBootstrapTable(url) {

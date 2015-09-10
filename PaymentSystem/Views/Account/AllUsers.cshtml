@@ -3,36 +3,19 @@
 @{
     ViewBag.Title = "Все пользователи";
 }
-
-<div class="row mt">
-    <div class="col-lg-12">
-        <div class="content-panel">
-            <h4><i class="fa fa-angle-right"></i> Все пользователи</h4>
-            <section id="no-more-tables">
-                <table class="table table-bordered table-striped table-condensed cf">
-                    <thead class="cf">
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
-                            <th>@Html.DisplayNameFor(model => model.LastName)</th>
-                            <th>@Html.DisplayNameFor(model => model.Email)</th>
-                            <th>Подбронее</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td data-title="@Html.DisplayNameFor(model => model.FirstName)">@item.FirstName</td>
-                                <td data-title="@Html.DisplayNameFor(model => model.LastName)">@item.LastName</td>
-                                <td data-title="@Html.DisplayNameFor(model => model.Email)">@item.Email</td>
-                                <td data-title="Подбронее">
-                                    @Html.ActionLink("Профиль", "Details", new { Controller="Manage", id = item.Id })
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </section>
-        </div><!-- /content-panel -->
-    </div><!-- /col-lg-12 -->
-</div><!-- /row -->
+<div class="col-md-12">
+    <h2>Операции</h2>
+    <table id="bootstrap-table" data-url="@Url.Action("Users", "Json")"
+           data-pagination="true" data-search="true"
+           data-show-refresh="true" data-show-toggle="true"
+           click-href="@Url.Action("Details", "Manage")">
+        <thead>
+            <tr>
+                <th data-field="FirstName" data-sortable="true">@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th data-field="LastName" data-sortable="true">@Html.DisplayNameFor(model => model.LastName)</th>
+                <th data-field="Email" data-sortable="true">@Html.DisplayNameFor(model => model.Email)</th>
+                <th data-field="Id" data-visible="false"></th>
+            </tr>
+        </thead>
+    </table>
+</div>

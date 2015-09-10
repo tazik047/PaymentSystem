@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EntityFrameworkDAO.Identity;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+//using Microsoft.Owin.Security;
 
 namespace PaymentSystem.Controllers
 {
@@ -25,12 +28,26 @@ namespace PaymentSystem.Controllers
             return Json(operations, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Accounts(long userId = 0)
+        public ActionResult Accounts(string Id)
         {
-            var accounts = AccountService.GetAllAccounts(_factory, User.Identity.GetUserId());
+            var accounts = AccountService.GetAllAccounts(_factory, Id, User.Identity.GetUserId(), User.IsInRole("User"));
             if (accounts == null)
                 return new HttpNotFoundResult();
             return Json(accounts, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin, Support")]
+        public ActionResult Users()
+        {
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var users = userManager.Users.Select(u => new
+            {
+                u.Id,
+                u.Email,
+                u.LastName,
+                u.FirstName
+            }).ToList();
+            return Json(users, JsonRequestBehavior.AllowGet);
         }
     }
 }

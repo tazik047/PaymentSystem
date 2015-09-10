@@ -32,8 +32,10 @@ namespace BLL.Services
             return OrderAccountsByField(repository, order, a => a.Balance);
         }
 
-        public static object GetAllAccounts(IRepositoryFactory factory, string userId)
+        public static object GetAllAccounts(IRepositoryFactory factory, string userId, string originId, bool needCheck)
         {
+            if (needCheck && originId != userId)
+                return null;
             return factory.AccountRepository.Find(a => a.UserId.Equals(userId))
                 .Select(a => new
                 {

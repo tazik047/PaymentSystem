@@ -4,15 +4,15 @@
     <table id="bootstrap-table" data-url="@Url.Action("Accounts", "Json")"
            data-pagination="true" data-search="true"
            data-show-refresh="true" data-show-toggle="true"
-           data-row-style="accountIsBlocked"
+           data-row-attributes="accountIsBlocked"
            click-href="@Url.Action("Details", "Card")">
         <thead>
-        <tr>
-            <th data-field="Name" data-sortable="true">@Html.DisplayNameFor(model => model.Card.Name)</th>
-            <th data-field="Balance" data-sortable="true">@Html.DisplayNameFor(model => model.Balance)</th>
-            <th data-field="CreationDate" data-sortable="true">@Html.DisplayNameFor(model => model.CreationDate)</th>
-            <th data-field="Id" data-visible="false"></th>
-        </tr>
+            <tr>
+                <th data-field="Name" data-sortable="true">@Html.DisplayNameFor(model => model.Card.Name)</th>
+                <th data-field="Balance" data-sortable="true">@Html.DisplayNameFor(model => model.Balance)</th>
+                <th data-field="CreationDate" data-sortable="true">@Html.DisplayNameFor(model => model.CreationDate)</th>
+                <th data-field="Id" data-visible="false"></th>
+            </tr>
         </thead>
     </table>
 </div>
