@@ -28,9 +28,9 @@ namespace PaymentSystem.Controllers
             return Json(operations, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Accounts(string Id)
+        public ActionResult Accounts(string id)
         {
-            var accounts = AccountService.GetAllAccounts(_factory, Id, User.Identity.GetUserId(), User.IsInRole("User"));
+            var accounts = AccountService.GetAllAccounts(_factory, id, User.Identity.GetUserId(), User.IsInRole("User"));
             if (accounts == null)
                 return new HttpNotFoundResult();
             return Json(accounts, JsonRequestBehavior.AllowGet);
@@ -42,6 +42,22 @@ namespace PaymentSystem.Controllers
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var users = userManager.Users.Select(u => new
             {
+                isBlocked = u.LockoutEnabled,
+                u.Id,
+                u.Email,
+                u.LastName,
+                u.FirstName
+            }).ToList();
+            return Json(users, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin, Support")]
+        public ActionResult BlockedUsers()
+        {
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var users = userManager.Users.Where(u=>u.LockoutEnabled).Select(u => new
+            {
+                isBlocked = u.LockoutEnabled,
                 u.Id,
                 u.Email,
                 u.LastName,

@@ -14,6 +14,28 @@ function createBootstrapTable(url) {
     });
 }
 
+function blockUser() {
+    console.log('sdfsdf');
+}
+
 $(document).ready(function () {
     createBootstrapTable($('#bootstrap-table').attr('click-href'));
+    $('#blockUser').click(function (e) {
+        var bt = $(this);
+        $.get(bt.attr('href'), function (str) {
+            swal({
+                title: str,
+                type: "success",
+                showCancelButton: false,
+                confirmButtonText: "Oк",
+                closeOnConfirm: false,
+            },
+                function (conf) {
+                    location.reload();
+                });
+        }).fail(function () {
+            swal("Ошибка", "Не удалось" + $(this).html() + "пользователя", "warning")
+        })
+
+    });
 });

@@ -1,12 +1,12 @@
 ﻿@using PaymentSystem.Util
-@model IEnumerable<DAO.Model.User>
+@model DAO.Model.User
 
 @{
-    ViewBag.Title = "Все пользователи";
+    ViewBag.Title = "Заблокированные пользователи";
 }
 <div class="col-md-12">
-    <h2>Все пользователи</h2>
-    @Html.CreateBootstrapTable(Url.Action("Users", "Json"),
+    <h2>Все заблокированные пользователи</h2>
+    @Html.CreateBootstrapTable(Url.Action("BlockedUsers", "Json"),
     new List<ColumnItem>
     {
         new ColumnItem("FirstName",Html.DisplayNameFor(model => model.FirstName)),
@@ -14,3 +14,4 @@
         new ColumnItem("Email",Html.DisplayNameFor(model => model.Email)),
     }, Url.Action("Details", "Manage"))
 </div>
+

@@ -32,10 +32,30 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
     </dl>
+    @if (User.IsInRole("Admin") && User.Identity.Name != Model.UserName)
+    {
+        string text, style, href;
+        if (Model.LockoutEnabled)
+        {
+            text = "Разблокировать";
+            style = "btn-success";
+            href = Url.Action("UnBlock", new {Controller = "Account", id = Model.Id});
+        }
+        else
+        {
+            text = "Заблокировать";
+            style = "btn-danger";
+            href = Url.Action("Block", new {Controller = "Account", id = Model.Id});
+        }
+        <br />
+        <button class="btn btn-block btn-default @style" href="@href" onclick="blockUser" id="blockUser">
+            @text
+        </button>
+    }
+
     @if (User.IsInRole("Admin") || User.IsInRole("Support"))
     {
         <div>
-            <h2>Все счета</h2>
             @Html.Partial("_AccountsPartial", Model.Accounts)
         </div>
     }

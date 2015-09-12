@@ -1,55 +1,14 @@
-﻿@model IEnumerable<DAO.Model.Account>
-<div class="col-md-12">
-    <h2>Операции</h2>
-    <table id="bootstrap-table" data-url="@Url.Action("Accounts", "Json")"
-           data-pagination="true" data-search="true"
-           data-show-refresh="true" data-show-toggle="true"
-           data-row-attributes="accountIsBlocked"
-           click-href="@Url.Action("Details", "Card")">
-        <thead>
-            <tr>
-                <th data-field="Name" data-sortable="true">@Html.DisplayNameFor(model => model.Card.Name)</th>
-                <th data-field="Balance" data-sortable="true">@Html.DisplayNameFor(model => model.Balance)</th>
-                <th data-field="CreationDate" data-sortable="true">@Html.DisplayNameFor(model => model.CreationDate)</th>
-                <th data-field="Id" data-visible="false"></th>
-            </tr>
-        </thead>
-    </table>
-</div>
-<!--
-<section id="no-more-tables">
-    <table class="table table-bordered table-hover table-striped table-condensed cf">
-        <thead class="cf">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Card.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Balance)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreationDate)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr onclick="location.href = '@Url.Action("Details", new {Controller = "Card", id = item.Card.CardId})'"
-                    @if (item.IsBlocked) { @: class="alert alert-danger" title="Карта заблокирована"
-                                                            }>
-                    <td data-title="@Html.DisplayNameFor(model => model.Card.Name)">
-                        @Html.DisplayFor(modelItem => item.Card.Name)
-                    </td>
-                    <td data-title="@Html.DisplayNameFor(model => model.Balance)">
-                        @Html.DisplayFor(modelItem => item.Balance)
-                    </td>
-                    <td data-title="@Html.DisplayNameFor(model => model.CreationDate)">
-                        @Html.DisplayFor(modelItem => item.CreationDate)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+﻿@using Microsoft.AspNet.Identity;
+@using PaymentSystem.Util;
 
-</section>-->
+@model IEnumerable<DAO.Model.Account>
+<div class="col-md-12">
+    <h2>Счета</h2>
+    @Html.CreateBootstrapTable(Url.Action("Accounts", new { Controller = "Json", id = ViewContext.RouteData.Values["id"] }),
+    new List<ColumnItem>
+    {
+        new ColumnItem("Name", Html.DisplayNameFor(model => model.Card.Name)),
+        new ColumnItem("Balance", Html.DisplayNameFor(model => model.Balance)),
+        new ColumnItem("CreationDate", Html.DisplayNameFor(model => model.CreationDate)),
+    }, Url.Action("Details", "Card"), "accountIsBlocked")
+</div>

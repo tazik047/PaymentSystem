@@ -2,9 +2,17 @@
 
 @{
     ViewBag.Title = "Заблокировано";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<hgroup>
-    <h1 class="text-danger">Заблокировано.</h1>
-    <h2 class="text-danger">Эта учетная запись заблокирована. Попробуйте еще раз позже.</h2>
-</hgroup>
+<div id="login-page">
+    <div class="container">
+        <form class="form-login form-horizontal">
+            <h2 class="form-login-heading">Заблокировано.</h2>
+            <div class="login-wrap">
+                <h4 class="text-danger text-center">Эта учетная запись заблокирована. <br/>
+                Попробуйте @Html.ActionLink("еще раз", "Login", "Account") позже.</h4>
+            </div>
+        </form>
+    </div>
+</div>

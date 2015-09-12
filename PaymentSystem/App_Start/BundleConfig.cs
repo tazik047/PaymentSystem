@@ -38,7 +38,8 @@ namespace PaymentSystem
                     "~/Scripts/sparkline-chart.js",
                     "~/Scripts/zabuto_calendar.js",
                     "~/Scripts/chart-master/Chart.js",
-                    "~/Scripts/bootstrap-table.js"
+                    "~/Scripts/bootstrap-table.js",
+                    "~/Scripts/sweetalert.min.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
@@ -52,7 +53,8 @@ namespace PaymentSystem
                       "~/Content/style.css",
                       "~/Content/style-reponsive.css",
                       "~/Content/table-responsive.css",
-                      "~/Content/bootstrap-table.css"));
+                      "~/Content/bootstrap-table.css",
+                      "~/Content/sweetalert.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                     "~/Scripts/form-component.js",

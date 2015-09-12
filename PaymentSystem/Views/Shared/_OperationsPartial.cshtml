@@ -1,17 +1,12 @@
-﻿@model IEnumerable<DAO.Model.Operation>
+﻿@using PaymentSystem.Util
+@model IEnumerable<DAO.Model.Operation>
 <div class="col-md-12">
     <h2>Операции</h2>
-    <table id="bootstrap-table" data-url="@Url.Action("Operations", new { Controller="Json", id = ViewBag.AccountId})"
-           data-pagination="true" data-search="true"
-           data-show-refresh="true" data-show-toggle="true"
-           click-href="@Url.Action("Details","Operation")">
-        <thead>
-            <tr>
-                <th data-field="OperationDate" data-sortable="true">@Html.DisplayNameFor(model => model.OperationDate)</th>
-                <th data-field="Amount" data-sortable="true">@Html.DisplayNameFor(model => model.Amount)</th>
-                <th data-field="Type" data-sortable="true">@Html.DisplayNameFor(model => model.Type)</th>
-                <th data-field="Id" data-visible="false"></th>
-            </tr>
-        </thead>
-    </table>
+    @Html.CreateBootstrapTable(Url.Action("Operations", new { Controller = "Json", id = ViewBag.AccountId }),
+    new List<ColumnItem>
+    {
+        new ColumnItem("OperationDate", Html.DisplayNameFor(model => model.OperationDate)),
+        new ColumnItem("Amount", Html.DisplayNameFor(model => model.Amount)),
+        new ColumnItem("Type", Html.DisplayNameFor(model => model.Type)),
+    }, Url.Action("Details", "Operation"))
 </div>

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Services;
 using DAO.Model;
 using DAO.Repository;
 using EntityFrameworkDAO.Identity;
@@ -81,6 +82,7 @@ namespace PaymentSystem.Controllers
 
             // Сбои при входе не приводят к блокированию учетной записи
             // Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
+            //SignInManager.
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -92,7 +94,7 @@ namespace PaymentSystem.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ViewBag.Error =  "Неудачная попытка входа.";
                     return View(model);
             }
         }
@@ -392,9 +394,7 @@ namespace PaymentSystem.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // /Account/LogOff
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
@@ -410,23 +410,24 @@ namespace PaymentSystem.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Block(long? userId)
+        public ActionResult Block(string id)
         {
-            //UserManager.SetLockoutEnabledAsync()
-            return View();
+            UserService.LockUser(UserManager, id, true);
+            return Content("Пользователь заблокирован");
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult UnBlock(long? userId)
+        public ActionResult UnBlock(string id)
         {
-            return View();
+            UserService.LockUser(UserManager, id, false);
+            return Content("Пользователь разблокирован");
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult AllUsers()
         {
-            var users = _factory.GetUserRepository(UserManager).Get();
-            return View(users);
+            //var users = _factory.GetUserRepository(UserManager).Get();
+            return View();
         }
 
         [Authorize(Roles = "Admin")]
