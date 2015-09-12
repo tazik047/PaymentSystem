@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL;
 using BLL.Services;
 using DAO.Repository;
 using Microsoft.AspNet.Identity;
@@ -38,20 +39,35 @@ namespace PaymentSystem.Controllers
             return View(account);
         }
 
-        public ActionResult Block(long? cardId)
+        public ActionResult BlockedAccounts()
         {
             return View();
         }
 
-        public ActionResult RequertToUnBlock(long? cardId)
+        public ActionResult Block(long id = 0)
         {
-            return View();
+            try
+            {
+                AccountService.BlockAccount(_factory, id, User.Identity.GetUserId(), User.IsInRole("User"));
+                return Content("Счет успешно заблокирован");
+            }
+            catch (ValidationException e)
+            {
+                return new HttpNotFoundResult(e.Message);
+            }
+            
+        }
+
+        public ActionResult RequertToUnBlock(long id = 0)
+        {
+            return Content("Запрос отправлен администратору на разблокировку.");
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult UnBlock(long? cardId)
+        public ActionResult UnBlock(long id = 0)
         {
-            return View();
+            AccountService.UnBlockAccount(_factory, id);
+            return Content("Аккаунт разблокирован.");
         }
     }
 }

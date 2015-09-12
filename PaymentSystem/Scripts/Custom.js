@@ -14,13 +14,9 @@ function createBootstrapTable(url) {
     });
 }
 
-function blockUser() {
-    console.log('sdfsdf');
-}
-
 $(document).ready(function () {
     createBootstrapTable($('#bootstrap-table').attr('click-href'));
-    $('#blockUser').click(function (e) {
+    $('#blockUser,#blockAccount').click(function (e) {
         var bt = $(this);
         $.get(bt.attr('href'), function (str) {
             swal({
@@ -34,7 +30,7 @@ $(document).ready(function () {
                     location.reload();
                 });
         }).fail(function () {
-            swal("Ошибка", "Не удалось" + $(this).html() + "пользователя", "warning")
+            swal("Ошибка", "Не удалось" + bt.html(), "warning")
         })
 
     });

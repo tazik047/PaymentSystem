@@ -10,28 +10,6 @@ namespace BLL.Services
 {
     public static class AccountService
     {
-        //todo: Need find only user's account.
-        private static List<Account> OrderAccountsByField<T>(IAccountRepository repository, SortType order, Func<Account, T> field)
-        {
-            var result = repository.Get().OrderBy(field);
-            return order == SortType.Descending ? result.Reverse().ToList() : result.ToList();
-        }
-
-        public static List<Account> OrderAccountsByName(IAccountRepository repository, SortType order)
-        {
-            return OrderAccountsByField(repository, order, a => a.Card.Name);
-        }
-
-        public static List<Account> OrderAccountsByNumber(IAccountRepository repository, SortType order)
-        {
-            return OrderAccountsByField(repository, order, a => a.Card.Number);
-        }
-
-        public static List<Account> OrderAccountsByBalance(IAccountRepository repository, SortType order)
-        {
-            return OrderAccountsByField(repository, order, a => a.Balance);
-        }
-
         public static object GetAllAccounts(IRepositoryFactory factory, string userId, string originId, bool needCheck)
         {
             if (needCheck && originId != userId)
@@ -39,12 +17,37 @@ namespace BLL.Services
             return factory.AccountRepository.Find(a => a.UserId.Equals(userId))
                 .Select(a => new
                 {
-                    Id = a.Card.CardId, 
+                    Id = a.Card.CardId,
                     a.Card.Name,
-                    CreationDate = a.CreationDate.ToShortDateString(), 
+                    CreationDate = a.CreationDate.ToShortDateString(),
                     a.Balance,
                     a.IsBlocked
                 });
+        }
+
+        public static List<Tuple<string, string>> GetAccounts(IRepositoryFactory factory, string userId)
+        {
+            return factory.AccountRepository.Find(a => a.UserId.Equals(userId))
+                .Select(a => new Tuple<string, string>(a.AccountId.ToString(), FormatAccountName(a)))
+                .ToList();
+        }
+
+        public static string FormatAccountName(Account a)
+        {
+            return string.Format("{0} - {1} (**{2})", a.Card.Name, a.Balance,
+                a.Card.Number.Substring(a.Card.Name.Length - 4));
+        }
+
+        public static object GetBlockedAccounts(IRepositoryFactory factory)
+        {
+            return factory.AccountRepository.Find(a => a.IsBlocked).Select(a => new
+            {
+                Id = a.Card.CardId,
+                FIO = a.User.LastName + " " + a.User.FirstName,
+                a.Card.Name,
+                CreationDate = a.CreationDate.ToShortDateString(),
+                a.Balance,
+            });
         }
 
         public static Account GetAccount(IRepositoryFactory factory, long id, string userId, bool needCheckUserId)
@@ -53,6 +56,23 @@ namespace BLL.Services
             if ((account == null) || (needCheckUserId && account.UserId != userId))
                 return null;
             return account;
+        }
+
+        public static void BlockAccount(IRepositoryFactory factory, long accountId, string userId, bool needCheckUserId)
+        {
+            var account = factory.AccountRepository.FindById(accountId);
+            if ((account == null) || (needCheckUserId && account.UserId != userId))
+                throw new ValidationException("У вас нет прав для блокировки данного счета.");
+            account.IsBlocked = true;
+            factory.AccountRepository.Edit(account);
+        }
+
+        public static void UnBlockAccount(IRepositoryFactory factory, long accountId)
+        {
+            var account = factory.AccountRepository.FindById(accountId);
+            if (account == null) return;
+            account.IsBlocked = false;
+            factory.AccountRepository.Edit(account);
         }
     }
 }

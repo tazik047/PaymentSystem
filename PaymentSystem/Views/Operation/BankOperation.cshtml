@@ -1,0 +1,62 @@
+﻿@model DAO.Model.BankOperation
+
+@{
+    ViewBag.Title = "Банковская операция";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>BankOperation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResipientNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResipientNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BancCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BancCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SortCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SortCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>

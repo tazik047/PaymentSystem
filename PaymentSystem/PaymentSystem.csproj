@@ -265,6 +265,11 @@
     <Content Include="Views\Card\Details.cshtml" />
     <Content Include="Views\Shared\_OperationsPartial.cshtml" />
     <Content Include="Views\Account\AllBlockedUsers.cshtml" />
+    <Content Include="Views\Operation\_OperationTable.cshtml" />
+    <Content Include="Views\Operation\MobileOperation.cshtml" />
+    <Content Include="Views\Operation\BankOperation.cshtml" />
+    <Content Include="Views\Operation\CardOperation.cshtml" />
+    <Content Include="Views\Card\BlockedAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

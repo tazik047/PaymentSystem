@@ -1,0 +1,24 @@
+﻿@using PaymentSystem.Util
+@model DAO.Model.Operation
+
+@{
+    string action = ViewBag.ActionName.ToString();
+    var columns = new List<ColumnItem>
+    {
+        new ColumnItem("Name", Html.DisplayNameFor(model => model.Account.Card.Name)),
+        new ColumnItem("OperationDate", Html.DisplayNameFor(model => model.OperationDate)),
+        new ColumnItem("Amount", Html.DisplayNameFor(model => model.Amount)),
+    };
+    if (ViewBag.ShowType)
+    {
+        columns.Add(new ColumnItem("Type", Html.DisplayNameFor(model => model.Type)));
+    }
+}
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    @Html.CreateBootstrapTable(Url.Action(action, new { Controller = "Json" }),
+    columns, Url.Action("Details", "Operation"))
+</div>
+
+
+

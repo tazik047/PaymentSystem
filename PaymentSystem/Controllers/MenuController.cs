@@ -26,7 +26,7 @@ namespace PaymentSystem.Controllers
                             Url.Action("AllBlockedUsers", new {Controller = "Account", area = ""}), "")
                         ),
                     new MenuItemViewModel("Заблокированные счета",
-                        Url.Action("Block", new {Controller = "Card", area = ""}), "fa-ban"),
+                        Url.Action("BlockedAccounts", new {Controller = "Card", area = ""}), "fa-ban"),
                 };
             }
             else
@@ -38,8 +38,9 @@ namespace PaymentSystem.Controllers
                     new MenuItemViewModel("Операции", "", "fa-dashboard",
                         new MenuItemViewModel("Пополненить счет",
                             Url.Action("CreateReplenishment", new {Controller = "Operation", area = ""}), ""),
-                        new MenuItemViewModel("Оплатить",
-                            Url.Action("CreatePayment", new {Controller = "Operation", area = ""}), ""),
+                            new MenuItemViewModel("Банковский платеж", Url.Action("CreateBankOperation", new {Controller="Operation", area=""}),""),
+                            new MenuItemViewModel("С карты на карту", Url.Action("CreateCardOperation", new {Controller="Operation", area=""}),""),
+                            new MenuItemViewModel("Платеж на мобильный", Url.Action("CreateMobileOperation", new {Controller="Operation", area=""}),""),
                         new MenuItemViewModel("Подготовить платеж",
                             Url.Action("CreatePreparedPayment", new {Controller = "Operation", area = ""}), "")
                         ),
@@ -54,9 +55,7 @@ namespace PaymentSystem.Controllers
                         new MenuItemViewModel("Пополнения",
                             Url.Action("Replenishments", new {Controller = "Operation", area = ""}), ""),
                         new MenuItemViewModel("Платежи",
-                            Url.Action("Payments", new {Controller = "Operation", area = ""}), ""),
-                        new MenuItemViewModel("Подготовленные платежи",
-                            Url.Action("PreparedPayments", new {Controller = "Operation", area = ""}), "")
+                            Url.Action("Payments", new {Controller = "Operation", area = ""}), "")
                         ),
                 };
             }

@@ -34,8 +34,20 @@ namespace EntityFrameworkDAO
             // Create users.
             var users = new[]
             {
-                new User {Email = "admin@payment.com", UserName = "admin@payment.com"},
-                new User {Email = "support@payment.com", UserName = "support@payment.com"},
+                new User
+                {
+                    Email = "admin@payment.com", 
+                    UserName = "admin@payment.com", 
+                    LastName = "Admin", 
+                    FirstName = "Admin"
+                },
+                new User
+                {
+                    Email = "support@payment.com", 
+                    UserName = "support@payment.com",
+                    FirstName = "Support",
+                    LastName = "Support"
+                },
                 new User
                 {
                     Email = "stas249501@gmail.com",

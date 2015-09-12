@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -11,7 +12,9 @@ namespace DAO.Model
 {
     public class User : IdentityUser
     {
-        public string FirstName { get;set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
 

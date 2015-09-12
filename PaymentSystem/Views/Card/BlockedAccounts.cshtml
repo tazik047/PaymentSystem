@@ -1,0 +1,18 @@
+﻿@using PaymentSystem.Util
+@model DAO.Model.Account
+
+@{
+    ViewBag.Title = "Заблокированные счета";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    @Html.CreateBootstrapTable(Url.Action("BlockedAccounts", new { Controller = "Json"}),
+    new List<ColumnItem>
+    {
+        new ColumnItem("FIO","ФИО"),
+        new ColumnItem("Name", Html.DisplayNameFor(model => model.Card.Name)),
+        new ColumnItem("Balance", Html.DisplayNameFor(model => model.Balance)),
+        new ColumnItem("CreationDate", Html.DisplayNameFor(model => model.CreationDate)),
+    }, Url.Action("Details", "Card"))
+</div>

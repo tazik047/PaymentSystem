@@ -15,5 +15,7 @@ namespace PaymentSystem.Util
             Name = name;
             Title = title;
         }
+
+        public ColumnItem(string name, string title) : this(name, new MvcHtmlString(title)) { }
     }
 }
