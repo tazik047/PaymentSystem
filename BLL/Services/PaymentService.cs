@@ -10,16 +10,16 @@ namespace BLL.Services
 {
     public static class PaymentService
     {
-        public static void PreparePayment(Account account, Operation operation, IRepositoryFactory factory)
+        public static void PreparePayment(Operation operation, IRepositoryFactory factory, string userId)
         {
             operation.Type = OperationType.PreparedPayment;
-            Payment(account, operation, factory);
+            Payment(operation, factory, userId);
         }
 
-        public static void PayPayment(Account account, Operation operation, IRepositoryFactory factory)
+        public static void PayPayment(Operation operation, IRepositoryFactory factory, string userId)
         {
             operation.Type = OperationType.Paymnet;
-            Payment(account, operation, factory);
+            Payment(operation, factory, userId);
         }
 
         public static void CancelPreparedPayment(Account account, Operation operation, IRepositoryFactory factory)
@@ -32,8 +32,11 @@ namespace BLL.Services
             factory.AccountRepository.Edit(account);
         }
 
-        public static void ReplenishAccount(Account account, Operation operation, IRepositoryFactory factory)
+        public static void ReplenishAccount(Operation operation, IRepositoryFactory factory, string userId)
         {
+            var account = factory.AccountRepository.FindById(operation.AccountId);
+            if(!account.UserId.Equals(userId) || account.IsBlocked)
+                throw new ValidationException("Нельзя пополнить данный счет.");
             operation.Type = OperationType.Replenishment;
             account.Balance += operation.Amount;
             operation.OperationDate = DateTime.Now;
@@ -41,7 +44,7 @@ namespace BLL.Services
             factory.AccountRepository.Edit(account);
         }
 
-        public static void AcceptPreparedPayment(long operationId, IRepositoryFactory factory)
+        public static void AcceptPreparedPayment(long operationId, IRepositoryFactory factory, string userId)
         {
             var operation = factory.OperationRepository.FindById(operationId);
             if (operation.Type != OperationType.PreparedPayment)
@@ -56,15 +59,20 @@ namespace BLL.Services
                 {
                     var replenishmentOperation = new CardOperation
                     {
-                        Amount = operation.Amount
+                        Amount = operation.Amount,
+                        CardNumber = cOperation.CardNumber,
+                        AccountId = card.AccountId
                     };
-                    ReplenishAccount(card.Account, replenishmentOperation, factory);
+                    ReplenishAccount(replenishmentOperation, factory, userId);
                 }
             }
         }
 
-        private static void Payment(Account account, Operation operation, IRepositoryFactory factory)
+        private static void Payment(Operation operation, IRepositoryFactory factory, string userId)
         {
+            var account = factory.AccountRepository.FindById(operation.AccountId);
+            if (!account.UserId.Equals(userId) || account.IsBlocked)
+                throw new ValidationException("Нельзя использовать данный счет.");
             if (operation.Amount > account.Balance)
                 throw new ValidationException("Сумма платежа больше, чем баланс на счету.");
             operation.OperationDate = DateTime.Now;

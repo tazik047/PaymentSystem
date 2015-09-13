@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +26,15 @@ namespace EntityFrameworkDAO.Repository
 
         public void Edit(Account item)
         {
-            var old = FindById(item.AccountId);
+            _db.Entry(item).State = EntityState.Modified;
+            /*var old = FindById(item.AccountId);
             old.Balance = item.Balance;
             old.Card = item.Card;
             old.Balance = item.Balance;
             old.IsBlocked = item.IsBlocked;
             old.Operations.Clear();
             foreach (var tag in item.Operations)
-                old.Operations.Add(tag);
+                old.Operations.Add(tag);*/
             _db.SaveChanges();
         }
 

@@ -18,20 +18,19 @@ $(document).ready(function () {
     createBootstrapTable($('#bootstrap-table').attr('click-href'));
     $('#blockUser,#blockAccount').click(function (e) {
         var bt = $(this);
-        $.get(bt.attr('href'), function (str) {
+        $.get(bt.attr('href'), function(str) {
             swal({
-                title: str,
-                type: "success",
-                showCancelButton: false,
-                confirmButtonText: "Oк",
-                closeOnConfirm: false,
-            },
-                function (conf) {
+                    title: str,
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonText: "Oк",
+                    closeOnConfirm: false,
+                },
+                function(conf) {
                     location.reload();
                 });
-        }).fail(function () {
+        }).fail(function() {
             swal("Ошибка", "Не удалось" + bt.html(), "warning")
-        })
-
+        });
     });
 });

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL;
 using BLL.Services;
 using DAO.Model;
 using DAO.Repository;
@@ -32,11 +33,40 @@ namespace PaymentSystem.Controllers
             return View();
         }
 
+        private ActionResult CreateOperation(Operation operation, FormCollection form)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (form["Prepared"].Contains("true"))
+                        PaymentService.PreparePayment(operation, _factory, User.Identity.GetUserId());
+                    else
+                        PaymentService.PayPayment(operation, _factory, User.Identity.GetUserId());
+                    TempData["SuccessMessage"] = "Операция выполненая успешно.";
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ValidationException e)
+                {
+                    ModelState.AddModelError(e.Property, e.Message);
+                }
+            }
+            ViewBag.Accounts = AccountService.GetAccounts(_factory, User.Identity.GetUserId())
+                .Select(t => new SelectListItem { Value = t.Item1, Text = t.Item2 });
+            return View(operation);
+        }
+
         public ActionResult CreateBankOperation()
         {
             ViewBag.Accounts = AccountService.GetAccounts(_factory, User.Identity.GetUserId())
                 .Select(t => new SelectListItem {Value = t.Item1, Text = t.Item2});
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateBankOperation(BankOperation operation, FormCollection form)
+        {
+            return CreateOperation(operation, form);
         }
 
         public ActionResult CreateCardOperation()
@@ -46,11 +76,23 @@ namespace PaymentSystem.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult CreateCardOperation(CardOperation operation, FormCollection form)
+        {
+            return CreateOperation(operation, form);
+        }
+
         public ActionResult CreateMobileOperation()
         {
             ViewBag.Accounts = AccountService.GetAccounts(_factory, User.Identity.GetUserId())
                 .Select(t => new SelectListItem { Value = t.Item1, Text = t.Item2 });
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateMobileOperation(MobileOperation operation, FormCollection form)
+        {
+            return CreateOperation(operation, form);
         }
 
         public ActionResult CreateReplenishment()
@@ -61,13 +103,24 @@ namespace PaymentSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateReplenishment(MobileOperation operation, bool? Prepared, string Account, FormCollection form)
+        public ActionResult CreateReplenishment(MobileOperation operation)
         {
             if (ModelState.IsValid)
             {
-                
+                try
+                {
+                    PaymentService.ReplenishAccount(operation, _factory, User.Identity.GetUserId());
+                    TempData["SuccessMessage"] = "Платеж успешно осуществен.";
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ValidationException e)
+                {
+                    ModelState.AddModelError(e.Property, e.Message);
+                }
             }
-            return View();
+            ViewBag.Accounts = AccountService.GetAccounts(_factory, User.Identity.GetUserId())
+                .Select(t => new SelectListItem { Value = t.Item1, Text = t.Item2 });
+            return View(operation);
         }
 
         public ActionResult CreatePreparedPayment()

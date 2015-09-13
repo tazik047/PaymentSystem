@@ -27,7 +27,7 @@ namespace BLL.Services
 
         public static List<Tuple<string, string>> GetAccounts(IRepositoryFactory factory, string userId)
         {
-            return factory.AccountRepository.Find(a => a.UserId.Equals(userId))
+            return factory.AccountRepository.Find(a => a.UserId.Equals(userId) && !a.IsBlocked)
                 .Select(a => new Tuple<string, string>(a.AccountId.ToString(), FormatAccountName(a)))
                 .ToList();
         }
@@ -35,7 +35,7 @@ namespace BLL.Services
         public static string FormatAccountName(Account a)
         {
             return string.Format("{0} - {1} (**{2})", a.Card.Name, a.Balance,
-                a.Card.Number.Substring(a.Card.Name.Length - 4));
+                a.Card.Number.Substring(a.Card.Number.Length - 4));
         }
 
         public static object GetBlockedAccounts(IRepositoryFactory factory)

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using BLL.Services;
+using DAO.Model;
 using DAO.Repository;
 using Microsoft.AspNet.Identity;
 
@@ -29,6 +30,25 @@ namespace PaymentSystem.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Card card)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    CardService.CreateCard(card, User.Identity.GetUserId(), _factory);
+                    TempData["SuccessMessage"] = "Карта успешно добавлена";
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (ValidationException e)
+                {
+                    ModelState.AddModelError(e.Property,e.Message);
+                }
+            }
+            return View(card);
         }
 
         public ActionResult Details(long id = 0)

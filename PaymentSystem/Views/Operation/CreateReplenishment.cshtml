@@ -33,9 +33,9 @@
 
 
         <div class="form-group">
-            <label for="Account" class="control-label col-md-2 col-md-offset-2">Счет</label>
+            @Html.LabelFor(model => model.AccountId, new { @class = "control-label col-md-2 col-md-offset-2" })
             <div class="col-md-6">
-                @Html.DropDownList("Account", (IEnumerable<SelectListItem>) ViewBag.Accounts, new {@class = "form-control"})
+                @Html.DropDownListFor(model=>model.AccountId, (IEnumerable<SelectListItem>) ViewBag.Accounts, new {@class = "form-control"})
             </div>
         </div>
 
