@@ -33,4 +33,21 @@
             @Html.DisplayFor(model => model.MobileNumber)
         </dd>
     </dl>
+    @if (Model.Type == DAO.Model.OperationType.PreparedPayment)
+    {
+        <button class="btn btn-default btn-block btn-success" id="op-accept">Подвтредить</button>
+        <button class="btn btn-default btn-block btn-danger" id="op-cancel">Отменить</button>
+        @section scripts{
+            <script>
+                $(document).ready(function () {
+                    $('#op-accept').click(function () {
+                        changeOperation("подтвердить", "@Url.Action("Accept",new{Controller = "Operation", id = Model.OperationId})");
+                    });
+                    $('#op-cancel').click(function () {
+                        changeOperation("отменить", "@Url.Action("Cancel",new{Controller = "Operation", id = Model.OperationId})");
+                    });
+                });
+            </script>
+        }
+    }
 </div>

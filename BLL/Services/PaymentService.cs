@@ -22,8 +22,14 @@ namespace BLL.Services
             Payment(operation, factory, userId);
         }
 
-        public static void CancelPreparedPayment(Account account, Operation operation, IRepositoryFactory factory)
+        public static void CancelPreparedPayment(long id, string userId, IRepositoryFactory factory)
         {
+            var operation = factory.OperationRepository.FindById(id);
+            if(operation==null)
+                throw new ValidationException("Нельзя отменить чужую операцию");
+            var account = operation.Account;
+            if(account.User.Id!=userId)
+                throw new ValidationException("Нельзя отменить чужую операцию");
             if (operation.Type != OperationType.PreparedPayment)
                 throw new ValidationException("Невозможно отменить выполненный платеж.");
             account.Balance += operation.Amount;
@@ -44,27 +50,33 @@ namespace BLL.Services
             factory.AccountRepository.Edit(account);
         }
 
-        public static void AcceptPreparedPayment(long operationId, IRepositoryFactory factory, string userId)
+        public static void AcceptPreparedPayment(long operationId, string userId, IRepositoryFactory factory)
         {
             var operation = factory.OperationRepository.FindById(operationId);
+            if (operation.Account.User.Id != userId)
+                throw new ValidationException("Нельзя подтвердить чужую операцию");
             if (operation.Type != OperationType.PreparedPayment)
                 throw new ValidationException("Этот платеж невозможно подтвердить.");
             operation.Type = OperationType.Paymnet;
             factory.OperationRepository.Edit(operation);
-            if (operation is CardOperation)
+            CheckCardOperation(factory, userId, operation);
+        }
+
+        private static void CheckCardOperation(IRepositoryFactory factory, string userId, Operation operation)
+        {
+            if (!(operation is CardOperation)) return;
+            var cOperation = operation as CardOperation;
+            cOperation.CardNumber = new string(cOperation.CardNumber.Where(c => c != ' ').ToArray());
+            var card = factory.CardRepository.Find(c => c.Number.Equals(cOperation.CardNumber)).FirstOrDefault();
+            if (card != null)
             {
-                var cOperation = operation as CardOperation;
-                var card = factory.CardRepository.Find(c => c.Number.Equals(cOperation.CardNumber)).FirstOrDefault();
-                if (card != null)
+                var replenishmentOperation = new CardOperation
                 {
-                    var replenishmentOperation = new CardOperation
-                    {
-                        Amount = operation.Amount,
-                        CardNumber = cOperation.CardNumber,
-                        AccountId = card.AccountId
-                    };
-                    ReplenishAccount(replenishmentOperation, factory, userId);
-                }
+                    Amount = operation.Amount,
+                    CardNumber = cOperation.CardNumber,
+                    AccountId = card.Account.AccountId
+                };
+                ReplenishAccount(replenishmentOperation, factory, userId);
             }
         }
 
@@ -79,6 +91,8 @@ namespace BLL.Services
             account.Balance -= operation.Amount;
             account.Operations.Add(operation);
             factory.AccountRepository.Edit(account);
+            if(operation.Type!= OperationType.PreparedPayment)
+                CheckCardOperation(factory, userId, operation);
         }
     }
 }

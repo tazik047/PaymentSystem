@@ -11,6 +11,7 @@ namespace DAO.Model
     {
         [Required]
         [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"\(\d\d\d\) \d\d\d-\d\d-\d\d",ErrorMessage = "Номер телефона должен иметь формат: (095) 111-11-11")]
         public string MobileNumber { get; set; }
     }
 }

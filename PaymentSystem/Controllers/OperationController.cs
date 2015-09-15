@@ -161,5 +161,31 @@ namespace PaymentSystem.Controllers
                 return new HttpNotFoundResult();
             return View(operation.GetType().Name.Split('_')[0], operation);
         }
+
+        public ActionResult Cancel(long id = 0)
+        {
+            try
+            {
+                PaymentService.CancelPreparedPayment(id, User.Identity.GetUserId(), _factory);
+                return Json("Операция успешно отменена.", JsonRequestBehavior.AllowGet);
+            }
+            catch (ValidationException e)
+            {
+                return new HttpNotFoundResult(e.Message);
+            }
+        }
+
+        public ActionResult Accept(long id = 0)
+        {
+            try
+            {
+                PaymentService.AcceptPreparedPayment(id, User.Identity.GetUserId(), _factory);
+                return Json("Операция успешно подтверждена.", JsonRequestBehavior.AllowGet);
+            }
+            catch (ValidationException)
+            {
+                return new HttpNotFoundResult();
+            }
+        }
     }
 }

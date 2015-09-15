@@ -17,6 +17,7 @@ namespace BLL.Services
 
         public static void CreateCard(Card card, string userId, IRepositoryFactory factory)
         {
+            card.Number = new string(card.Number.Where(c=>c!=' ').ToArray());
             var account = new Account
             {
                 Balance = 0,

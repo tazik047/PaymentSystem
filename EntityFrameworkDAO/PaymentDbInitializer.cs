@@ -93,8 +93,8 @@ namespace EntityFrameworkDAO
                     {
                         Name = "Стипендеальная",
                         Cvc = 1123,
-                        ExpirationDate = new DateTime(2020, 09, 1),
-                        Number = "5168 1234 1234 1234",
+                        ExpirationDate = "09 / 2020",
+                        Number = "5168123412341234",
                         FullName = "Задорожний Станислав"
                     },
                     CreationDate = new DateTime(2015, 9, 9),
@@ -103,13 +103,13 @@ namespace EntityFrameworkDAO
                     {
                         new MobileOperation
                         {
-                            MobileNumber = "+38(095)312-38-38",
+                            MobileNumber = "(095) 312-38-38",
                             Amount = 150, OperationDate = new DateTime(2015,09,10),
                             Type = OperationType.Replenishment
                         },
                         new CardOperation
                         {
-                            CardNumber = "5168 1234 1234 4321",
+                            CardNumber = "5168123412341234",
                             OperationDate = new DateTime(2015, 9, 19),
                             Amount = 50,
                             Type = OperationType.Replenishment
@@ -124,8 +124,8 @@ namespace EntityFrameworkDAO
                     {
                         Name = "Универсальная",
                         Cvc = 777,
-                        ExpirationDate = new DateTime(2018, 09, 1),
-                        Number = "5168 1234 1234 4321",
+                        ExpirationDate = "09 / 2018",
+                        Number = "5168123412344321",
                         FullName = "Задорожний Станислав"
                     },
                     CreationDate = new DateTime(2015, 9, 15),
@@ -134,13 +134,13 @@ namespace EntityFrameworkDAO
                     {
                         new MobileOperation
                         {
-                            MobileNumber = "+38(095)312-38-38",
+                            MobileNumber = "(095) 312-38-38",
                             Amount = 100, OperationDate = new DateTime(2015,9,16),
                             Type = OperationType.Replenishment
                         },
                         new CardOperation
                         {
-                            CardNumber = "5168 1234 1234 4321",
+                            CardNumber = "5168123412341234",
                             OperationDate = new DateTime(2015, 9, 19),
                             Amount = 50,
                             Type = OperationType.Paymnet

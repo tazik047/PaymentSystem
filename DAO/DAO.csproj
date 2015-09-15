@@ -81,6 +81,7 @@
     <Compile Include="Model\Operation.cs" />
     <Compile Include="Model\OperationType.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="MyValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IAccountRepository.cs" />
     <Compile Include="Repository\ICardRepository.cs" />

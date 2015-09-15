@@ -12,6 +12,7 @@ namespace DAO.Model
         [Required]
         [MinLength(12)]
         [MaxLength(19)]
+        [RegularExpression(@"[\d\s]+", ErrorMessage = "Номер карты имеет неверный формат.")]
         public string CardNumber { get; set; }
     }
 }

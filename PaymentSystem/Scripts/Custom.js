@@ -14,22 +14,51 @@ function createBootstrapTable(url) {
     });
 }
 
-$(document).ready(function () {
-    createBootstrapTable($('#bootstrap-table').attr('click-href'));
-    $('#blockUser,#blockAccount').click(function (e) {
-        var bt = $(this);
-        $.get(bt.attr('href'), function(str) {
-            swal({
+function changeOperation(text, url) {
+    swal({
+        title: "Вы уверены?",
+        text: "Вы точно хотите "+text + " операцию?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Да",
+        cancelButtonText: "Отмена",
+        closeOnConfirm: false
+        },
+        function() {
+            $.get(url, function (str) {
+                swal({
                     title: str,
                     type: "success",
                     showCancelButton: false,
                     confirmButtonText: "Oк",
                     closeOnConfirm: false,
                 },
-                function(conf) {
+                    function (conf) {
+                        location.reload();
+                    });
+            }).fail(function () {
+                swal("Ошибка", "Не удалось изменить статус операции.", "error")
+            });
+        });
+}
+
+$(document).ready(function () {
+    createBootstrapTable($('#bootstrap-table').attr('click-href'));
+    $('#blockUser,#blockAccount').click(function (e) {
+        var bt = $(this);
+        $.get(bt.attr('href'), function (str) {
+            swal({
+                title: str,
+                type: "success",
+                showCancelButton: false,
+                confirmButtonText: "Oк",
+                closeOnConfirm: false,
+            },
+                function (conf) {
                     location.reload();
                 });
-        }).fail(function() {
+        }).fail(function () {
             swal("Ошибка", "Не удалось" + bt.html(), "warning")
         });
     });
