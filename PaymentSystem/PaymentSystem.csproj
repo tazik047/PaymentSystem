@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OperationController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Filters\UserActivationChecker.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,6 +275,7 @@
     <Content Include="Views\Operation\BankOperation.cshtml" />
     <Content Include="Views\Operation\CardOperation.cshtml" />
     <Content Include="Views\Card\BlockedAccounts.cshtml" />
+    <Content Include="Views\Request\Last.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

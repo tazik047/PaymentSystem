@@ -24,6 +24,7 @@ namespace EntityFrameworkDAO
         public DbSet<BankOperation> BankOperations { get; set; }
         public DbSet<CardOperation> CardOperations { get; set; }
         public DbSet<MobileOperation> MobileOperations { get; set; }
+        public DbSet<Request> Requests { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -80,6 +80,7 @@
     <Compile Include="Model\MobileOperation.cs" />
     <Compile Include="Model\Operation.cs" />
     <Compile Include="Model\OperationType.cs" />
+    <Compile Include="Model\Request.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="MyValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Repository\IOperationRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IRepositoryFactory.cs" />
+    <Compile Include="Repository\IRequestRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

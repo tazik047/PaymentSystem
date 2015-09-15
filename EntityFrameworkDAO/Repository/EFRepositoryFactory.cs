@@ -40,6 +40,12 @@ namespace EntityFrameworkDAO.Repository
                 return new OperationRepository(_context);
             }
         }
+
+        public IRequestRepository RequestRepository
+        {
+            get { return new RequestRepository(_context); }
+        }
+
         public IUserRepository GetUserRepository(UserManager<User> userManager)
         {
             return new UserRepository(_context, (ApplicationUserManager) userManager);

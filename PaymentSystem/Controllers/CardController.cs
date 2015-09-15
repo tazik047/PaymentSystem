@@ -80,7 +80,16 @@ namespace PaymentSystem.Controllers
 
         public ActionResult RequertToUnBlock(long id = 0)
         {
-            return Content("Запрос отправлен администратору на разблокировку.");
+            try
+            {
+                RequestService.AddRequest(id, User.Identity.GetUserId(), _factory);
+                return Content("Запрос отправлен администратору на разблокировку.");
+            }
+            catch (ValidationException e)
+            {
+                return new HttpNotFoundResult(e.Message);
+            }
+            
         }
 
         [Authorize(Roles = "Admin")]

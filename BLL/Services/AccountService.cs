@@ -73,6 +73,11 @@ namespace BLL.Services
             if (account == null) return;
             account.IsBlocked = false;
             factory.AccountRepository.Edit(account);
+            var request = factory.RequestRepository.Find(r => r.Account.AccountId == accountId).FirstOrDefault();
+            if (request != null)
+            {
+                RequestService.AcceptRequest(request.RequestId, factory);
+            }
         }
     }
 }

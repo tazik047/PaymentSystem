@@ -84,6 +84,7 @@
     <Compile Include="Repository\CardRepository.cs" />
     <Compile Include="Repository\EFRepositoryFactory.cs" />
     <Compile Include="Repository\OperationRepository.cs" />
+    <Compile Include="Repository\RequestRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
