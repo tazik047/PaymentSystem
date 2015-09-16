@@ -1,0 +1,18 @@
+﻿@using PaymentSystem.Util
+@model DAO.Model.Request
+
+@{
+    ViewBag.Title = "Все запросы на разблокировку";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="col-md-12">
+    <h2>Операции</h2>
+    @Html.CreateBootstrapTable(Url.Action("Requests","Json"),
+    new List<ColumnItem>
+    {
+        new ColumnItem("Date", Html.DisplayNameFor(model => model.Date)),
+        new ColumnItem("Name", Html.DisplayNameFor(model => model.Account.Card.Name)),
+    }, Url.Action("Details", "Card"))
+</div>
+

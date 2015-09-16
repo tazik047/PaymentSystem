@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -56,7 +57,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="~/img/ui-zac.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="@Url.Action("GetImage", "Account", new{id = User.Identity.GetUserId()})"></span>
                                     <span class="subject">
                                         <span class="from">Zac Snider</span>
                                         <span class="time">Just now</span>

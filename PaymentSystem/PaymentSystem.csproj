@@ -276,6 +276,8 @@
     <Content Include="Views\Operation\CardOperation.cshtml" />
     <Content Include="Views\Card\BlockedAccounts.cshtml" />
     <Content Include="Views\Request\Last.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

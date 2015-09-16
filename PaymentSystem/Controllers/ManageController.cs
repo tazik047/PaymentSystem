@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Services;
+using DAO.Model;
 using DAO.Repository;
 using EntityFrameworkDAO.Identity;
 using Microsoft.AspNet.Identity;
@@ -332,6 +334,30 @@ namespace PaymentSystem.Controllers
             var user = _factory.GetUserRepository(UserManager).FindById(id);
             if (user == null)
                 return new HttpStatusCodeResult(404);
+            return View(user);
+        }
+
+        public ActionResult Edit()
+        {
+            string userId = User.Identity.GetUserId();
+            return View(_factory.GetUserRepository(UserManager).FindById(userId));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(User user, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    user.ImgMimeType = file.ContentType;
+                    user.ImageBytes = new byte[file.ContentLength];
+                    file.InputStream.Read(user.ImageBytes, 0, file.ContentLength);
+                }
+                _factory.GetUserRepository(UserManager).Edit(user, User.Identity.GetUserId());
+                return RedirectToAction("Details");
+                //UserManager.Update(user);
+            }
             return View(user);
         }
 

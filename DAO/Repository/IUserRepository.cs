@@ -8,6 +8,7 @@ namespace DAO.Repository
     public interface IUserRepository : IRepository<User>
     {
         void Add(User item, string password, string role="User");
+        void Edit(User item, string userId);
         void Delete(string id);
         User FindById(string id);
         List<User> Get(string role);

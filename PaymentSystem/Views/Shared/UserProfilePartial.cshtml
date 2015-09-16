@@ -1,6 +1,7 @@
-﻿<a href="@Url.Action("Details", "Manage")">
+﻿@using Microsoft.AspNet.Identity
+<a href="@Url.Action("Details", "Manage")">
     <p class="centered">
-        <img src="~/img/ui-sam.jpg" class="img-circle" width="60">
+        <img src="@Url.Action("GetImage", "Account", new{id = User.Identity.GetUserId()})" class="img-circle" width="60">
     </p>
     <h5 class="centered">@User.Identity.Name</h5>
 </a>

@@ -62,7 +62,7 @@ namespace BLL.Services
             return factory.RequestRepository.Get().OrderByDescending(r => r.Date).Select(r => new
             {
                 Id = r.RequestId,
-                r.Date,
+                Date = r.Date.ToShortDateString() + " " + r.Date.ToShortTimeString(),
                 r.Account.Card.Name
             }).ToList();
         }

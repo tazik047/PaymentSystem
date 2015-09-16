@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -434,6 +435,12 @@ namespace PaymentSystem.Controllers
         public ActionResult AllBlockedUsers()
         {
             return View();
+        }
+
+        public ActionResult GetImage(string id)
+        {
+            var res = UserService.GetImage(_factory, UserManager, id);
+            return File(res.Item1, res.Item2);
         }
 
         protected override void Dispose(bool disposing)

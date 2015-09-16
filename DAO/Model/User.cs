@@ -16,6 +16,8 @@ namespace DAO.Model
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        public byte[] ImageBytes { get; set; }
+        public string ImgMimeType { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

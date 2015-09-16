@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,9 +30,24 @@ namespace EntityFrameworkDAO.Repository
             _userManager.Create(item);
         }
 
-        public void Edit(User item)
+        public void Edit(User item, string userId)
         {
-            _userManager.Update(item);
+            var old = FindById(userId);
+            old.LastName = item.LastName;
+            old.UserName = item.Email;
+            old.FirstName = item.FirstName;
+            old.PhoneNumber = item.PhoneNumber;
+            old.Email = item.Email;
+            if (item.ImageBytes != null)
+            {
+                old.ImageBytes = item.ImageBytes;
+                old.ImgMimeType = item.ImgMimeType;
+            }
+            //item.Id = userId;
+            //_userManager.Update(item);
+            _db.Entry(old).State = EntityState.Modified;
+            _db.SaveChanges();
+            //_userManager.
         }
 
         public void Delete(long id)
@@ -46,7 +62,7 @@ namespace EntityFrameworkDAO.Repository
 
         public List<User> Get()
         {
-            return _userManager.Users.ToList();
+            return _db.Users.ToList();
         }
 
         public List<User> Get(int skip, int take)
@@ -69,7 +85,7 @@ namespace EntityFrameworkDAO.Repository
 
         public User FindById(string id)
         {
-            return _userManager.FindById(id);
+            return _db.Users.Find(id);
         }
 
         public List<User> Find(Func<User, bool> predicate)
@@ -86,6 +102,12 @@ namespace EntityFrameworkDAO.Repository
         public void SetLock(string id, bool block)
         {
             _userManager.SetLockoutEnabled(id, block);
+        }
+
+
+        public void Edit(User item)
+        {
+            _userManager.Update(item);
         }
     }
 }

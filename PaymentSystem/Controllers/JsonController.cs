@@ -94,6 +94,12 @@ namespace PaymentSystem.Controllers
             return PrepareResult(AccountService.GetBlockedAccounts(_factory));
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult Requests()
+        {
+            return PrepareResult(RequestService.Requests(_factory));
+        }
+
         private ActionResult PrepareResult(object o)
         {
             if (o == null)
