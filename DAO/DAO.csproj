@@ -77,6 +77,7 @@
     <Compile Include="Model\BankOperation.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\CardOperation.cs" />
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\MobileOperation.cs" />
     <Compile Include="Model\Operation.cs" />
     <Compile Include="Model\OperationType.cs" />
