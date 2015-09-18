@@ -23,3 +23,7 @@
 #no-more-tables tbody tr {
     cursor: pointer;
 }
+
+#bootstrap-table tr {
+    cursor: pointer;
+}

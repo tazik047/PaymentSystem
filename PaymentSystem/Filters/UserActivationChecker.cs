@@ -18,18 +18,18 @@ namespace PaymentSystem.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var context = filterContext.RequestContext.HttpContext;
-            var factory = (IRepositoryFactory) DependencyResolver.Current.GetService(typeof (IRepositoryFactory));
+            var factory = (IRepositoryFactory)DependencyResolver.Current.GetService(typeof(IRepositoryFactory));
             if (context.User.Identity.IsAuthenticated)
             {
                 var manager = context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var user = factory.GetUserRepository(manager).FindById(context.User.Identity.GetUserId());
-                if (user.LockoutEnabled)
+                if (user != null && user.LockoutEnabled)
                 {
                     var auth = context.GetOwinContext().Authentication;
                     auth.SignOut();
                 }
-                    //filterContext.Result = new RedirectResult("/Account/Logoff");
-                else 
+                //filterContext.Result = new RedirectResult("/Account/Logoff");
+                else
                     base.OnActionExecuting(filterContext);
             }
             else

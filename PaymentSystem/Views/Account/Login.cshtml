@@ -35,9 +35,6 @@
                     </div>
                 </div>
                 <br/>
-                <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> Забыли пароль?</a>
-                </span>
                 <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> ВОЙТИ</button>
                 <hr>
                 <div class="registration">
@@ -45,27 +42,6 @@
                     @Html.ActionLink("Создать аккаунт", "Register")
                 </div>
             </div>
-
-            <!-- Modal -->
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Забыли пароль ?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Введит Ваш e-mail для того, чтобы восстановить пароль.</p>
-                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control placeholder-no-fix", placeholder = Html.DisplayNameFor(model => model.Email), autocomplete = "off" })
-                        </div>
-                        <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-default" type="button">Отмена</button>
-                            <button class="btn btn-theme" type="button">Отправить</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- modal -->
         }
 
     </div>

@@ -1,8 +1,11 @@
 ﻿@model DAO.Model.BankOperation
-
+@{
+    ViewBag.Title = "Создать банковский платеж";
+}
 
 @using (Html.BeginForm())
 {
+    <h2>@ViewBag.Title</h2>
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -67,7 +70,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-8">
-                <input type="submit" value="Create" class="btn btn-default btn-block btn-success" />
+                <input type="submit" value="Оплатить" class="btn btn-default btn-block btn-success" />
             </div>
         </div>
     </div>

@@ -70,5 +70,7 @@
     @if (User.Identity.Name == Model.UserName)
     {
         @Html.ActionLink("Редактировать данный", "Edit")
+        <br/>
+        @Html.ActionLink("Изменить пароль", "ChangePassword")
     }
 </p>

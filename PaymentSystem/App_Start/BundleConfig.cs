@@ -39,6 +39,7 @@ namespace PaymentSystem
                     "~/Scripts/zabuto_calendar.js",
                     "~/Scripts/chart-master/Chart.js",
                     "~/Scripts/bootstrap-table.js",
+                    "~/Scripts/bootstrap-table-ru-RU.js",
                     "~/Scripts/sweetalert.min.js"
                 ));
 

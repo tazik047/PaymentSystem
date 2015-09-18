@@ -42,6 +42,8 @@ namespace PaymentSystem.Controllers
             if (id == 0)
                 return new HttpNotFoundResult();
             var message = MessageService.GetMessage(_factory, id);
+            if(message==null)
+                return new HttpNotFoundResult();
             message.Body = "";
             message.ToId = message.FromId;
             return View(message);

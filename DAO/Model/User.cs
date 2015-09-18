@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
@@ -10,14 +11,18 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAO.Model
 {
+    [MetadataType(typeof(UserMetaData))]
     public class User : IdentityUser
     {
         [Required]
+        [DisplayName("Имя")]
         public string FirstName { get; set; }
         [Required]
+        [DisplayName("Фамилия")]
         public string LastName { get; set; }
         public byte[] ImageBytes { get; set; }
         public string ImgMimeType { get; set; }
+        
         public virtual ICollection<Account> Accounts { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
@@ -27,5 +32,18 @@ namespace DAO.Model
             // Здесь добавьте утверждения пользователя
             return userIdentity;
         }
+    }
+
+    public class UserMetaData
+    {
+        [Required]
+        [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
+        public virtual string Email { get; set; }
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"\(\d\d\d\) \d\d\d-\d\d-\d\d", ErrorMessage = "Номер телефона должен иметь формат: (095) 111-11-11")]
+        [DisplayName("Номер телефона")]
+        public virtual string PhoneNumber { get; set; }
     }
 }

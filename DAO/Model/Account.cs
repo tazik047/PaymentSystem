@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -8,7 +9,9 @@ namespace DAO.Model
     public class Account
     {
         public long AccountId { get; set; }
+        [DisplayName("Дата создания")]
         public DateTime CreationDate { get; set; }
+        [DisplayName("Остаток")]
         public double Balance { get; set; }
         public bool IsBlocked { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
