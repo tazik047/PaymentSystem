@@ -3,7 +3,7 @@
 
 @model IEnumerable<DAO.Model.Account>
 <div class="col-md-12">
-    <h2>Счета</h2>
+    <h2>Все карты</h2>
     @Html.CreateBootstrapTable(Url.Action("Accounts", new { Controller = "Json", id = ViewContext.RouteData.Values["id"] }),
     new List<ColumnItem>
     {

@@ -1,0 +1,17 @@
+﻿@using PaymentSystem.Util
+@model IEnumerable<DAO.Model.Message>
+
+@{
+    ViewBag.Title = "Исходящие";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    @Html.CreateBootstrapTable(Url.Action("Outbox", "Json"),
+    new List<ColumnItem>
+    {
+        new ColumnItem("To", Html.DisplayNameFor(model => model.To)),
+        new ColumnItem("Theme", Html.DisplayNameFor(model => model.Theme)),
+        new ColumnItem("Date", Html.DisplayNameFor(model => model.Date)),
+    }, Url.Action("Details", "Message"))
+</div>

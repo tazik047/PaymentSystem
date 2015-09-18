@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public static class OperationServices
+    public static class OperationService
     {
         public static object Operations(IRepositoryFactory factory, long accountId, string userId, bool needCheck)
         {

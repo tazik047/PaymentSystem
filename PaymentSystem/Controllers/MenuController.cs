@@ -57,6 +57,14 @@ namespace PaymentSystem.Controllers
                         new MenuItemViewModel("Платежи",
                             Url.Action("Payments", new {Controller = "Operation", area = ""}), "")
                         ),
+                    new MenuItemViewModel("Помощь", "", "fa-envelope",
+                        new MenuItemViewModel("Входящие сообщения",
+                            Url.Action("Inbox", new {Controller = "Message", area = ""}), ""),
+                        new MenuItemViewModel("Исходящие сообщения",
+                            Url.Action("Outbox", new {Controller = "Message", area = ""}), ""),
+                        new MenuItemViewModel("Новое сообщение",
+                            Url.Action("NewMessage", new {Controller = "Message", area = ""}), "")
+                        ), 
                 };
             }
             return PartialView("_Menu", items);

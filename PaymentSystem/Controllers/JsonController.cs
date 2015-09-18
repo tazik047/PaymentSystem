@@ -23,31 +23,31 @@ namespace PaymentSystem.Controllers
 
         public ActionResult Operations(long id = 0)
         {
-            return PrepareResult(OperationServices.Operations(_factory, id, User.Identity.GetUserId(), User.IsInRole("User")));
+            return PrepareResult(OperationService.Operations(_factory, id, User.Identity.GetUserId(), User.IsInRole("User")));
         }
 
         public ActionResult AllOperations()
         {
-            return PrepareResult(OperationServices.AllUserOperations(_factory, User.Identity.GetUserId()));
+            return PrepareResult(OperationService.AllUserOperations(_factory, User.Identity.GetUserId()));
         }
 
         public ActionResult PreparedOperations()
         {
-            return PrepareResult(OperationServices.AllUserOperations(_factory,
+            return PrepareResult(OperationService.AllUserOperations(_factory,
                 User.Identity.GetUserId(),
                 o => o.Type == OperationType.PreparedPayment));
         }
 
         public ActionResult ReplenishmentOperations()
         {
-            return PrepareResult(OperationServices.AllUserOperations(_factory,
+            return PrepareResult(OperationService.AllUserOperations(_factory,
                 User.Identity.GetUserId(),
                 o => o.Type == OperationType.Replenishment));
         }
 
         public ActionResult PaymnetOperations()
         {
-            return PrepareResult(OperationServices.AllUserOperations(_factory,
+            return PrepareResult(OperationService.AllUserOperations(_factory,
                 User.Identity.GetUserId(),
                 o => o.Type == OperationType.Paymnet));
         }
@@ -98,6 +98,16 @@ namespace PaymentSystem.Controllers
         public ActionResult Requests()
         {
             return PrepareResult(RequestService.Requests(_factory));
+        }
+
+        public ActionResult Inbox()
+        {
+            return PrepareResult(MessageService.GetInbox(_factory, User.Identity.GetUserId()));
+        }
+
+        public ActionResult Outbox()
+        {
+            return PrepareResult(MessageService.GetOutbox(_factory, User.Identity.GetUserId()));
         }
 
         private ActionResult PrepareResult(object o)

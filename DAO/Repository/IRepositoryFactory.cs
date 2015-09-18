@@ -15,6 +15,7 @@ namespace DAO.Repository
     {
         IAccountRepository AccountRepository { get; }
         ICardRepository CardRepository { get; }
+        IMessageRepository MessageRepository { get; }
         IOperationRepository OperationRepository { get; }
         IRequestRepository RequestRepository { get; }
         IUserRepository GetUserRepository(UserManager<User> userManager);

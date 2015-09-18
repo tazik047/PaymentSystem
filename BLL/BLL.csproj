@@ -64,7 +64,8 @@
     </Compile>
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\CardService.cs" />
-    <Compile Include="Services\OperationServices.cs" />
+    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\OperationService.cs" />
     <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="Services\SortType.cs" />

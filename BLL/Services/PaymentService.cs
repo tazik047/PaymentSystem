@@ -58,8 +58,8 @@ namespace BLL.Services
             if (operation.Type != OperationType.PreparedPayment)
                 throw new ValidationException("Этот платеж невозможно подтвердить.");
             operation.Type = OperationType.Paymnet;
-            factory.OperationRepository.Edit(operation);
             CheckCardOperation(factory, userId, operation);
+            factory.OperationRepository.Edit(operation);
         }
 
         private static void CheckCardOperation(IRepositoryFactory factory, string userId, Operation operation)
@@ -88,11 +88,12 @@ namespace BLL.Services
             if (operation.Amount > account.Balance)
                 throw new ValidationException("Сумма платежа больше, чем баланс на счету.");
             operation.OperationDate = DateTime.Now;
+            if(operation.Type!= OperationType.PreparedPayment)
+                CheckCardOperation(factory, userId, operation);
             account.Balance -= operation.Amount;
             account.Operations.Add(operation);
             factory.AccountRepository.Edit(account);
-            if(operation.Type!= OperationType.PreparedPayment)
-                CheckCardOperation(factory, userId, operation);
+            
         }
     }
 }

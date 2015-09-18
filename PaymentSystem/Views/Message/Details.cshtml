@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNet.Identity
+@using PaymentSystem.Util
+@model DAO.Model.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <div class="col-md-1 col-md-offset-11">
+        @if (User.Identity.GetUserId()!=Model.From.Id)
+        {
+            <a href="@Url.Action("Answer", "Message", new {id = Model.MessageId})">
+                <i class="fa fa-reply" style="font-size: 30px"></i>
+            </a>
+        }
+    </div>
+    <h4>@Model.Theme</h4>
+    <i>@Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()</i>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <b>@Html.DisplayNameFor(model => model.From)</b>
+            </div>
+            <div>
+                <div class="col-md-2">
+                    <img width="35" src="@Url.Action("GetImage", new {Controller = "Account", id = Model.From.Id})"/>
+                </div>
+                <div class="col-md-10">
+                    @Model.From.LastName @Model.From.FirstName
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <b>@Html.DisplayNameFor(model => model.To)</b>
+            </div>
+            <div>
+                <div class="col-md-2">
+                    <img width="35" src="@Url.Action("GetImage", new {Controller = "Account", id = Model.To.Id})"/>
+                </div>
+                <div class="col-md-10">
+                    @Model.To.LastName @Model.To.FirstName
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div>
+        <div><b>@Html.DisplayNameFor(model => model.Body)</b></div>
+        <div class="col-md-offset-1">
+            @Html.Raw(@Model.Body.PrepareForMultyLine())
+        </div>
+    </div>
+</div>

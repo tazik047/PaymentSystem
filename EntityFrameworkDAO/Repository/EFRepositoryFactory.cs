@@ -64,6 +64,12 @@ namespace EntityFrameworkDAO.Repository
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
         }
 
-        
+
+
+
+        public IMessageRepository MessageRepository
+        {
+            get { return new MessageRepository(_context); }
+        }
     }
 }

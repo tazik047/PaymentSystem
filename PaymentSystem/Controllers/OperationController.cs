@@ -156,7 +156,7 @@ namespace PaymentSystem.Controllers
 
         public ActionResult Details(long id = 0)
         {
-            var operation = OperationServices.GetOperation(_factory, id);
+            var operation = OperationService.GetOperation(_factory, id);
             if(operation==null)
                 return new HttpNotFoundResult();
             return View(operation.GetType().Name.Split('_')[0], operation);
@@ -167,7 +167,8 @@ namespace PaymentSystem.Controllers
             try
             {
                 PaymentService.CancelPreparedPayment(id, User.Identity.GetUserId(), _factory);
-                return Json("Операция успешно отменена.", JsonRequestBehavior.AllowGet);
+                TempData["SuccessMessage"] = "Операция успешно отменена.";
+                return RedirectToAction("PreparedPayments");
             }
             catch (ValidationException e)
             {

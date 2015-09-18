@@ -10,6 +10,7 @@ namespace DAO.Model
     public class Message
     {
         public long MessageId { get; set; }
+        public DateTime Date { get; set; }
         public string Theme { get; set; }
         [Required]
         [DataType(DataType.MultilineText)]
