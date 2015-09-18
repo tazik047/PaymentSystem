@@ -13,10 +13,11 @@ namespace DAO.Model
         [DisplayName("Дата оперцаии")]
         public DateTime OperationDate { get; set; }
         [Required]
-        [Range(0, Double.MaxValue)]
+        [Range(0.01, Double.MaxValue)]
         [DisplayName("Сумма")]
         [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]
+        [RegularExpression(@"^\d+(.\d\d)?$",ErrorMessage="Сумма должна иметь формат 100.01")]
         public decimal Amount { get; set; }
         [DisplayName("Тип")]
         public OperationType Type { get; set; }
