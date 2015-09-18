@@ -15,7 +15,9 @@ namespace DAO.Model
         [Required]
         [Range(0, Double.MaxValue)]
         [DisplayName("Сумма")]
-        public double Amount { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Currency)]
+        public decimal Amount { get; set; }
         [DisplayName("Тип")]
         public OperationType Type { get; set; }
         [DisplayName("Использовать счет")]

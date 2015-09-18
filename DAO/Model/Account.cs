@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -12,7 +13,8 @@ namespace DAO.Model
         [DisplayName("Дата создания")]
         public DateTime CreationDate { get; set; }
         [DisplayName("Остаток")]
-        public double Balance { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
+        public decimal Balance { get; set; }
         public bool IsBlocked { get; set; }
         public virtual ICollection<Operation> Operations { get; set; }
         public string UserId { get; set; }
