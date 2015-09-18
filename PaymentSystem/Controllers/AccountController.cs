@@ -115,12 +115,21 @@ namespace PaymentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User
+                {
+                    UserName = model.Email, 
+                    Email = model.Email, 
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                };
                 var result = UserManager.Create(user, model.Password);
+                //UserManager.AddPassword(user.Id);
+                UserManager.AddToRole(user.Id, "User");
                 if (result.Succeeded)
                 {
                     SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-
+                    UserService.LockUser(UserManager, user.Id, false);
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
                     // Отправка сообщения электронной почты с этой ссылкой
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

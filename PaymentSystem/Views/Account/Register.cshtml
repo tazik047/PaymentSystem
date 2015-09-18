@@ -18,6 +18,21 @@
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
                 <br>
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.FirstName) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <br/>
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.LastName) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+                <br/>
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.PhoneNumber) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+                <br/>
                 @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Password) })
                 <div>
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })

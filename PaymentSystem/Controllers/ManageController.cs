@@ -110,13 +110,14 @@ namespace PaymentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (file != null)
+                if (file != null && file.ContentType.StartsWith("image"))
                 {
                     user.ImgMimeType = file.ContentType;
                     user.ImageBytes = new byte[file.ContentLength];
                     file.InputStream.Read(user.ImageBytes, 0, file.ContentLength);
                 }
                 _factory.GetUserRepository(UserManager).Edit(user, User.Identity.GetUserId());
+                TempData["SuccessMessage"] = "Данные успешно сохранены";
                 return RedirectToAction("Details");
                 //UserManager.Update(user);
             }

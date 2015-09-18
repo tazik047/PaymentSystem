@@ -34,10 +34,8 @@ namespace EntityFrameworkDAO.Repository
         {
             var old = FindById(userId);
             old.LastName = item.LastName;
-            old.UserName = item.Email;
             old.FirstName = item.FirstName;
             old.PhoneNumber = item.PhoneNumber;
-            old.Email = item.Email;
             if (item.ImageBytes != null)
             {
                 old.ImageBytes = item.ImageBytes;
