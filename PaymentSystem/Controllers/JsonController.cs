@@ -63,30 +63,14 @@ namespace PaymentSystem.Controllers
         public ActionResult Users()
         {
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var users = userManager.Users.Select(u => new
-            {
-                isBlocked = u.LockoutEnabled,
-                u.Id,
-                u.Email,
-                u.LastName,
-                u.FirstName
-            }).ToList();
-            return Json(users, JsonRequestBehavior.AllowGet);
+            return PrepareResult(UserService.GetUnBlockedUsers(userManager));
         }
 
         [Authorize(Roles = "Admin, Support")]
         public ActionResult BlockedUsers()
         {
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var users = userManager.Users.Where(u => u.LockoutEnabled).Select(u => new
-            {
-                isBlocked = u.LockoutEnabled,
-                u.Id,
-                u.Email,
-                u.LastName,
-                u.FirstName
-            }).ToList();
-            return Json(users, JsonRequestBehavior.AllowGet);
+            return PrepareResult(UserService.GetBlockedUsers(userManager));
         }
 
         public ActionResult BlockedAccounts()

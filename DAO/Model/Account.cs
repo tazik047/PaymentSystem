@@ -11,6 +11,7 @@ namespace DAO.Model
     {
         public long AccountId { get; set; }
         [DisplayName("Дата создания")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime CreationDate { get; set; }
         [DisplayName("Остаток")]
         [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]

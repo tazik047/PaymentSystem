@@ -10,7 +10,7 @@ namespace DAO.Model
 {
     public class MobileOperation : Operation
     {
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"\(\d\d\d\) \d\d\d-\d\d-\d\d",ErrorMessage = "Номер телефона должен иметь формат: (095) 111-11-11")]
         [DisplayName("Номер телефона")]

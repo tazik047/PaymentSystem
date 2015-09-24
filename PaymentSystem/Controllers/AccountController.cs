@@ -124,24 +124,15 @@ namespace PaymentSystem.Controllers
                     PhoneNumber = model.PhoneNumber,
                 };
                 var result = UserManager.Create(user, model.Password);
-                //UserManager.AddPassword(user.Id);
                 UserManager.AddToRole(user.Id, "User");
                 if (result.Succeeded)
                 {
                     SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                     UserService.LockUser(UserManager, user.Id, false);
-                    // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Отправка сообщения электронной почты с этой ссылкой
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
-            // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
 
@@ -170,7 +161,6 @@ namespace PaymentSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AllUsers()
         {
-            //var users = _factory.GetUserRepository(UserManager).Get();
             return View();
         }
 

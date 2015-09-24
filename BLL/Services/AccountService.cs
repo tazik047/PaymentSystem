@@ -8,8 +8,19 @@ using DAO.Repository;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for work with account user's.
+    /// </summary>
     public static class AccountService
     {
+        /// <summary>
+        /// Method for getting all user accounts.
+        /// </summary>
+        /// <param name="factory">Factory for working with data</param>
+        /// <param name="userId">Id of user which you want get</param>
+        /// <param name="originId">Id of current user</param>
+        /// <param name="needCheck">true if userId shoukd equals to originId</param>
+        /// <returns>List of accounts</returns>
         public static object GetAllAccounts(IRepositoryFactory factory, string userId, string originId, bool needCheck)
         {
             if (needCheck && originId != userId)
@@ -19,12 +30,15 @@ namespace BLL.Services
                 {
                     Id = a.Card.CardId,
                     a.Card.Name,
-                    CreationDate = a.CreationDate.ToShortDateString(),
+                    CreationDate = a.CreationDate.ToString("dd.MM.yyyy"),
                     a.Balance,
                     a.IsBlocked
                 });
         }
 
+        /// <summary>
+        /// Method for find all not blocked accounts and formatting them for display.
+        /// </summary>
         public static List<Tuple<string, string>> GetAccounts(IRepositoryFactory factory, string userId)
         {
             return factory.AccountRepository.Find(a => a.UserId.Equals(userId) && !a.IsBlocked)
@@ -32,12 +46,15 @@ namespace BLL.Services
                 .ToList();
         }
 
-        public static string FormatAccountName(Account a)
+        private static string FormatAccountName(Account a)
         {
             return string.Format("{0} - {1} (**{2})", a.Card.Name, a.Balance,
                 a.Card.Number.Substring(a.Card.Number.Length - 4));
         }
 
+        /// <summary>
+        /// Method for getting all blocked accounts.
+        /// </summary>
         public static object GetBlockedAccounts(IRepositoryFactory factory)
         {
             return factory.AccountRepository.Find(a => a.IsBlocked).Select(a => new
@@ -45,11 +62,18 @@ namespace BLL.Services
                 Id = a.Card.CardId,
                 FIO = a.User.LastName + " " + a.User.FirstName,
                 a.Card.Name,
-                CreationDate = a.CreationDate.ToShortDateString(),
+                CreationDate = a.CreationDate.ToString("dd.MM.yyyy"),
                 a.Balance,
             });
         }
 
+        /// <summary>
+        /// Get account for selected user.
+        /// </summary>
+        /// <param name="id">Id of account</param>
+        /// <param name="userId">Id of current user</param>
+        /// <param name="needCheckUserId">Check if account should be created by current user</param>
+        /// <returns></returns>
         public static Account GetAccount(IRepositoryFactory factory, long id, string userId, bool needCheckUserId)
         {
             var account = factory.AccountRepository.FindById(id);
@@ -58,6 +82,12 @@ namespace BLL.Services
             return account;
         }
 
+        /// <summary>
+        /// Method for blocking account.
+        /// </summary>
+        /// <param name="accountId">Id of account</param>
+        /// <param name="userId">Id of current user</param>
+        /// <param name="needCheckUserId">Check if account should be created by current user</param>
         public static void BlockAccount(IRepositoryFactory factory, long accountId, string userId, bool needCheckUserId)
         {
             var account = factory.AccountRepository.FindById(accountId);
@@ -67,6 +97,10 @@ namespace BLL.Services
             factory.AccountRepository.Edit(account);
         }
 
+        /// <summary>
+        /// Unblock selected account.
+        /// </summary>
+        /// <param name="accountId">Id of account which should be unblocked</param>
         public static void UnBlockAccount(IRepositoryFactory factory, long accountId)
         {
             var account = factory.AccountRepository.FindById(accountId);

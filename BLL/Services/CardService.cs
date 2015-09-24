@@ -8,13 +8,16 @@ using DAO.Repository;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for working with card.
+    /// </summary>
     public static class CardService
     {
-        public static List<Card> GetAllCards(IRepositoryFactory factory, string userId)
-        {
-            return factory.CardRepository.Find(c => c.Account.UserId.Equals(userId));
-        }
-
+        /// <summary>
+        /// Method for creating new card and prepare new account.
+        /// </summary>
+        /// <param name="card">Card, which need create.</param>
+        /// <param name="userId">Id of current user</param>
         public static void CreateCard(Card card, string userId, IRepositoryFactory factory)
         {
             card.Number = new string(card.Number.Where(c=>c!=' ').ToArray());

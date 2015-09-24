@@ -29,6 +29,18 @@ namespace PaymentSystem.Controllers
                         Url.Action("BlockedAccounts", new {Controller = "Card", area = ""}), "fa-ban"),
                 };
             }
+            else if (User.IsInRole("Support"))
+            {
+                items = new[]
+                {
+                    new MenuItemViewModel("Главная", Url.Action("Index", new {Controller = "Home", area = ""}),
+                        "fa-home"),
+                    new MenuItemViewModel("Входящие сообщения",
+                        Url.Action("Inbox", new {Controller = "Message", area = ""}), ""),
+                    new MenuItemViewModel("Исходящие сообщения",
+                        Url.Action("Outbox", new {Controller = "Message", area = ""}), ""),
+                };
+            }
             else
             {
                 items = new[]
@@ -38,9 +50,12 @@ namespace PaymentSystem.Controllers
                     new MenuItemViewModel("Операции", "", "fa-dashboard",
                         new MenuItemViewModel("Пополненить счет",
                             Url.Action("CreateReplenishment", new {Controller = "Operation", area = ""}), ""),
-                            new MenuItemViewModel("Банковский платеж", Url.Action("CreateBankOperation", new {Controller="Operation", area=""}),""),
-                            new MenuItemViewModel("С карты на карту", Url.Action("CreateCardOperation", new {Controller="Operation", area=""}),""),
-                            new MenuItemViewModel("Платеж на мобильный", Url.Action("CreateMobileOperation", new {Controller="Operation", area=""}),""),
+                        new MenuItemViewModel("Банковский платеж",
+                            Url.Action("CreateBankOperation", new {Controller = "Operation", area = ""}), ""),
+                        new MenuItemViewModel("С карты на карту",
+                            Url.Action("CreateCardOperation", new {Controller = "Operation", area = ""}), ""),
+                        new MenuItemViewModel("Платеж на мобильный",
+                            Url.Action("CreateMobileOperation", new {Controller = "Operation", area = ""}), ""),
                         new MenuItemViewModel("Подготовить платеж",
                             Url.Action("CreatePreparedPayment", new {Controller = "Operation", area = ""}), "")
                         ),
@@ -64,7 +79,7 @@ namespace PaymentSystem.Controllers
                             Url.Action("Outbox", new {Controller = "Message", area = ""}), ""),
                         new MenuItemViewModel("Новое сообщение",
                             Url.Action("NewMessage", new {Controller = "Message", area = ""}), "")
-                        ), 
+                        ),
                 };
             }
             return PartialView("_Menu", items);

@@ -26,7 +26,10 @@ namespace PaymentSystem.Util
             StringBuilder th = new StringBuilder();
             foreach (var column in columns)
             {
-                th.AppendFormat("<th data-field='{0}' data-sortable='true'>{1}</th>", column.Name, column.Title);
+                string dateSort = "";
+                if (column.Name.ToLower().Contains("date"))
+                    dateSort = "data-sorter=\"sortDate\"";
+                th.AppendFormat("<th data-field='{0}' data-sortable='true' {2}>{1}</th>", column.Name, column.Title, dateSort);
             }
             return new MvcHtmlString(string.Format(tableTemplate, jsonUrl, attributeFunction, click, th));
         }

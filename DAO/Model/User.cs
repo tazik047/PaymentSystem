@@ -14,10 +14,10 @@ namespace DAO.Model
     [MetadataType(typeof(UserMetaData))]
     public class User : IdentityUser
     {
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
         [DisplayName("Имя")]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
         [DisplayName("Фамилия")]
         public string LastName { get; set; }
         public byte[] ImageBytes { get; set; }
@@ -27,20 +27,18 @@ namespace DAO.Model
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
-            // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Здесь добавьте утверждения пользователя
             return userIdentity;
         }
     }
 
     public class UserMetaData
     {
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
         [DisplayName("Email")]
         [DataType(DataType.EmailAddress)]
         public virtual string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"\(\d\d\d\) \d\d\d-\d\d-\d\d", ErrorMessage = "Номер телефона должен иметь формат: (095) 111-11-11")]
         [DisplayName("Номер телефона")]

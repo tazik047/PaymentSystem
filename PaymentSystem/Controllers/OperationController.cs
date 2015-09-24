@@ -28,11 +28,6 @@ namespace PaymentSystem.Controllers
             return View("_OperationTable");
         }
 
-        public ActionResult CreatePayment()
-        {
-            return View();
-        }
-
         private ActionResult CreateOperation(Operation operation, FormCollection form)
         {
             if (ModelState.IsValid)

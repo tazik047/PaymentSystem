@@ -119,7 +119,6 @@ namespace PaymentSystem.Controllers
                 _factory.GetUserRepository(UserManager).Edit(user, User.Identity.GetUserId());
                 TempData["SuccessMessage"] = "Данные успешно сохранены";
                 return RedirectToAction("Details");
-                //UserManager.Update(user);
             }
             return View(user);
         }

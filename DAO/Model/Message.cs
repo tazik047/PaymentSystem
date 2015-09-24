@@ -12,10 +12,11 @@ namespace DAO.Model
     {
         public long MessageId { get; set; }
         [DisplayName("Дата")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}")]
         public DateTime Date { get; set; }
         [DisplayName("Тема")]
         public string Theme { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
         [DataType(DataType.MultilineText)]
         [DisplayName("Сообщение")]
         public string Body { get; set; }

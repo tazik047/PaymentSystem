@@ -3,29 +3,45 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Онлайн платежи</h1>
+    <p class="lead">
+        Добро пожаловать на сайт для выполнения платежей онлайн. 
+        <br/>
+        С помощью данного ресурса вы сможите с легкостью управлять своими банковскими карточками и выполнять различные платежи с их помощью.
+        <br/>
+        При возникновеннии каких-либо вопросов обращайтесь за помощью в техподдержку.
+    </p>
+    <p><a href="@Url.Action("NewMessage","Message")" class="btn btn-primary btn-lg">Помощь &raquo;</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Банковские карты</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            С помощью данного ресурса вы сможете легко добавлять свои новые карты, управлять ими, пополнять и производить произвольные платежи.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Card")">Мои карты &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Платежи</h2>
+        <p>
+            Система поддерживает различные типы платежей:
+            <ul>
+                <li>@Html.ActionLink("Банковский перевод", "CreateBankOperation", "Operation")</li>
+                <li>@Html.ActionLink("Мобильный перевод", "CreateMobileOperation", "Operation")</li>
+                <li>@Html.ActionLink("Перевод с карты на карту", "CreateCardOperation", "Operation")</li>
+            </ul>
+            Так же есть возможность сделать любой платеж отложенным.<br/>
+            Это позволит вам планировать ваши банковские операции.<br/>
+            В случае ошибки всегда можно отменить отложенный платеж.
+        </p>
+        
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>История</h2>
+        <p>
+            Все выполненные операции доступны для просмотра. Вы всегда можете посмотреть когда и какие операции вы выполняли.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Operation")">Просмотреть &raquo;</a></p>
     </div>
 </div>

@@ -10,9 +10,9 @@ namespace DAO.Model
 {
     public class CardOperation :Operation
     {
-        [Required]
-        [MinLength(14)]
-        [MaxLength(23)]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
+        [MinLength(14, ErrorMessage = "Длина номера карты должна быть больше 14 символов")]
+        [MaxLength(23, ErrorMessage = "Длина номера карты не должна превышать 23 символов")]
         [RegularExpression(@"[\d\s]+", ErrorMessage = "Номер карты имеет неверный формат.")]
         [DisplayName("Номер карты")]
         public string CardNumber { get; set; }

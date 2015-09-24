@@ -23,7 +23,6 @@ namespace PaymentSystem.Controllers
         // GET: Card
         public ActionResult Index()
         {
-            //var accounts = AccountService.GetAllAccounts(_factory, User.Identity.GetUserId());
             return View();
         }
 

@@ -12,8 +12,16 @@ using Microsoft.AspNet.Identity;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for manage users.
+    /// </summary>
     public static class UserService
     {
+        /// <summary>
+        /// Method for block/unblock user
+        /// </summary>
+        /// <param name="id">id of user for blocking</param>
+        /// <param name="lockUser">True for block user. False for unblock</param>
         public static void LockUser(UserManager<User> manager, string id, bool lockUser)
         {
             var user = manager.FindById(id);
@@ -21,13 +29,11 @@ namespace BLL.Services
             user.LockoutEnabled = lockUser;
             manager.Update(user);
         }
-        public static bool IsBlocked(UserManager<User> manager, string id)
-        {
-            var user = manager.Users.FirstOrDefault(u => u.Id.Equals(id));
-                //manager.FindById(id);
-            return user == null || user.LockoutEnabled;
-        }
 
+        /// <summary>
+        /// Get avatar for selected user
+        /// </summary>
+        /// <param name="id">Id of selected user</param>
         public static Tuple<byte[], string> GetImage(IRepositoryFactory factory, UserManager<User> manager, string id)
         {
             var user = factory.GetUserRepository(manager).FindById(id);
@@ -40,6 +46,30 @@ namespace BLL.Services
                 }
             }
             return new Tuple<byte[], string>(user.ImageBytes, user.ImgMimeType);
+        }
+
+        public static object GetUnBlockedUsers(UserManager<User> manager)
+        {
+            return manager.Users.Select(u => new
+            {
+                isBlocked = u.LockoutEnabled,
+                u.Id,
+                u.Email,
+                u.LastName,
+                u.FirstName
+            }).ToList();
+        }
+
+        public static object GetBlockedUsers(UserManager<User> manager)
+        {
+            return manager.Users.Where(u => u.LockoutEnabled).Select(u => new
+            {
+                isBlocked = u.LockoutEnabled,
+                u.Id,
+                u.Email,
+                u.LastName,
+                u.FirstName
+            }).ToList();
         }
     }
 }

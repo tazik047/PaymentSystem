@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DAO.Model;
 using DAO.Repository;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for working with requests of users.
+    /// </summary>
     public static class RequestService
     {
+        /// <summary>
+        /// Add new request for unblocking account.
+        /// </summary>
+        /// <param name="id">id of account to unblock</param>
+        /// <param name="userId">id of current user</param>
         public static void AddRequest(long id, string userId, IRepositoryFactory factory)
         {
             var account = factory.AccountRepository.FindById(id);
@@ -36,19 +42,29 @@ namespace BLL.Services
             }
         }
 
+        /// <summary>
+        /// Accept request and unblock account
+        /// </summary>
+        /// <param name="id">id of request</param>
         public static void AcceptRequest(long id, IRepositoryFactory factory)
         {
             var request = factory.RequestRepository.FindById(id);
             if (request == null) return;
-            //AccountService.UnBlockAccount(factory, request.Account.AccountId, false);
             factory.RequestRepository.Delete(id);
         }
 
+        /// <summary>
+        /// Get number of all requests.
+        /// </summary>
         public static long CountRequest(IRepositoryFactory factory)
         {
             return factory.RequestRepository.Get().LongCount();
         }
 
+        /// <summary>
+        /// Take first N request.
+        /// </summary>
+        /// <param name="n">number of requests</param>
         public static List<Request> FirstNRequests(IRepositoryFactory factory, int n)
         {
             return factory.RequestRepository.Get()
@@ -57,12 +73,15 @@ namespace BLL.Services
                 .ToList();
         } 
 
+        /// <summary>
+        /// Get all request.
+        /// </summary>
         public static object Requests(IRepositoryFactory factory)
         {
             return factory.RequestRepository.Get().OrderByDescending(r => r.Date).Select(r => new
             {
                 Id = r.RequestId,
-                Date = r.Date.ToShortDateString() + " " + r.Date.ToShortTimeString(),
+                Date = r.Date.ToString("dd.MM.yyyy HH:mm"),
                 r.Account.Card.Name
             }).ToList();
         }

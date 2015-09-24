@@ -7,23 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
     <title>@ViewBag.Title</title>
-
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/others")
-
     @Scripts.Render("~/bundles/chart")
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
-
     <section id="container">
         <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -41,74 +35,8 @@
                 <ul class="nav top-menu">
                     @if (User.IsInRole("Admin"))
                     {
-                        <!-- fkdsfjlksjfd -->
                         @Html.Action("Last", "Request")
                     }
-                    <!-- inbox dropdown start
-                    <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 5 new messages</p>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="~/img/ui-divya.jpg"></span>
-                                    <span class="subject">
-                                        <span class="from">Zac Snider</span>
-                                        <span class="time">Just now</span>
-                                    </span>
-                                    <span class="message">
-                                        Hi mate, how is everything?
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="~/img/ui-divya.jpg"></span>
-                                    <span class="subject">
-                                        <span class="from">Divya Manian</span>
-                                        <span class="time">40 mins.</span>
-                                    </span>
-                                    <span class="message">
-                                        Hi, I need your help with this.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="~/img/ui-danro.jpg"></span>
-                                    <span class="subject">
-                                        <span class="from">Dan Rogers</span>
-                                        <span class="time">2 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Love your new Dashboard.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="~/img/ui-sherman.jpg"></span>
-                                    <span class="subject">
-                                        <span class="from">Dj Sherman</span>
-                                        <span class="time">4 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Please, answer asap.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">See all messages</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- inbox dropdown end -->
                 </ul>
                 <!-- notification end -->
             </div>
@@ -121,21 +49,17 @@
                             <input type="submit" class="logout" value="Выйти" />
                         }
                     </li>
-                    <!--<li>@Html.ActionLink("Выйти", "LogOff", new {Controller = "Account", area = ""}, new {@class = "logout"})</li>-->
-
                 </ul>
             </div>
         </header>
         <!--header end-->
         @Html.Action("Index", "Menu")
-
         <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
             *********************************************************************************************************************************************************** -->
         <!--main content start-->
         <section id="main-content">
             <section class="wrapper">
-
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 main-chart">
                         @RenderBody()
@@ -143,7 +67,6 @@
                 </div><!--/row -->
             </section>
         </section>
-
         <!--main content end-->
         <!--footer start-->
         <footer class="site-footer">
@@ -159,31 +82,13 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
-    <!--<script src="~/js/jquery-1.8.3.min.js"></script>-->
     @Scripts.Render("~/bundles/additionScripts")
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         $(document).ready(function () {
-            console.log("@TempData["SuccessMessage"]");
-            if ('@TempData.ContainsKey("SuccessMessage")'=='True')
-            {
-                swal('@TempData["SuccessMessage"]',"","success");
+            if ('@TempData.ContainsKey("SuccessMessage")' == 'True') {
+                swal('@TempData["SuccessMessage"]', "", "success");
             }
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['ru-RU']);
-            $("#date-popover").popover({ html: true, trigger: "manual" });
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });
-
-            $('.go-top').click(function () {
-                $.scrollTo(0, 1000);
-            });
             var url = '/@ViewContext.RouteData.Values["controller"]/@ViewContext.RouteData.Values["action"]';
             var res = url.replace(/Home/, '').replace(/\/Index/, '');
             var selected = $('#sidebar a[href$="' + res + '"]');
@@ -194,14 +99,6 @@
             }
             selected.addClass('active');
         });
-
-
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
     </script>
     <script src="~/Scripts/Custom.js"></script>
 </body>

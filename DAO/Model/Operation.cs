@@ -11,9 +11,10 @@ namespace DAO.Model
     {
         public long OperationId { get; set; }
         [DisplayName("Дата оперцаии")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}")]
         public DateTime OperationDate { get; set; }
-        [Required]
-        [Range(0.01, Double.MaxValue)]
+        [Required(ErrorMessage = "Это поле обязательно к заполнению")]
+        [Range(0.01, Double.MaxValue, ErrorMessage = "Сумма должна быть больше одной копейки")]
         [DisplayName("Сумма")]
         [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]

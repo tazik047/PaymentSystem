@@ -18,7 +18,7 @@
                     <span class="photo"><img alt="avatar" src="@Url.Action("GetImage", "Account", new{id = i.Account.User.Id})"></span>
                     <span class="subject">
                         <span class="from">@i.Account.User.FirstName</span>
-                        <span class="time">@i.Date.ToShortDateString()</span>
+                        <span class="time">@i.Date.ToString("dd.MM.yyyy")</span>
                     </span>
                     <span class="message">
                         Разблокируйте мою карту:<br/>@i.Account.Card.Name

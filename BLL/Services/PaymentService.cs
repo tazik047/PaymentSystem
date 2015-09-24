@@ -8,20 +8,34 @@ using DAO.Repository;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for working with payments.
+    /// </summary>
     public static class PaymentService
     {
+        /// <summary>
+        /// Method for prepare payment
+        /// </summary>
         public static void PreparePayment(Operation operation, IRepositoryFactory factory, string userId)
         {
             operation.Type = OperationType.PreparedPayment;
             Payment(operation, factory, userId);
         }
 
+        /// <summary>
+        /// Method for create new payment.
+        /// </summary>
         public static void PayPayment(Operation operation, IRepositoryFactory factory, string userId)
         {
             operation.Type = OperationType.Paymnet;
             Payment(operation, factory, userId);
         }
 
+        /// <summary>
+        /// Method for cancel prepared payment.
+        /// </summary>
+        /// <param name="id">id of payment</param>
+        /// <param name="userId">id of user which has this payment</param>
         public static void CancelPreparedPayment(long id, string userId, IRepositoryFactory factory)
         {
             var operation = factory.OperationRepository.FindById(id);
@@ -38,6 +52,9 @@ namespace BLL.Services
             factory.AccountRepository.Edit(account);
         }
 
+        /// <summary>
+        /// Method for replensish account.
+        /// </summary>
         public static void ReplenishAccount(Operation operation, IRepositoryFactory factory, string userId)
         {
             var account = factory.AccountRepository.FindById(operation.AccountId);
@@ -50,6 +67,11 @@ namespace BLL.Services
             factory.AccountRepository.Edit(account);
         }
 
+        /// <summary>
+        /// Method for accept prepared payment.
+        /// </summary>
+        /// <param name="operationId">id of payment</param>
+        /// <param name="userId">id of user which has this payment</param>
         public static void AcceptPreparedPayment(long operationId, string userId, IRepositoryFactory factory)
         {
             var operation = factory.OperationRepository.FindById(operationId);
@@ -93,7 +115,6 @@ namespace BLL.Services
             account.Balance -= operation.Amount;
             account.Operations.Add(operation);
             factory.AccountRepository.Edit(account);
-            
         }
     }
 }
