@@ -9,6 +9,7 @@ using DAO.Model;
 using EntityFrameworkDAO.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Text;
 //using Microsoft.Owin.Security;
 
 namespace PaymentSystem.Controllers
@@ -92,6 +93,29 @@ namespace PaymentSystem.Controllers
         public ActionResult Outbox()
         {
             return PrepareResult(MessageService.GetOutbox(_factory, User.Identity.GetUserId()));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult UserOperationsReport()
+        {
+            var res = ReportService.UserOperations(_factory);
+            return PrepareResult(res
+                .Select(r => new
+                {
+                    r.Item1.FirstName,
+                    r.Item1.LastName,
+                    r.Item1.Id,
+                    Accounts = prepareArray(r.Item2),
+                    Sum = prepareArray("Платежи: " + r.Item3 + " грн.", "Пополнения: " + r.Item4 + " грн.")
+                }));
+        }
+
+        private string prepareArray<T>(params T[] items)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var i in items)
+                sb.Append(i + "<br />");
+            return sb.ToString();
         }
 
         private ActionResult PrepareResult(object o)

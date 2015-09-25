@@ -30,7 +30,8 @@ function createBootstrapTable(url) {
         onClickRow: function (row) {
             if (row.Id != '')
                 location.href = url + "/" + row.Id;
-        }
+        },
+        striped: true,
     });
 }
 
@@ -57,7 +58,8 @@ function changeOperation(text, url) {
                     function (conf) {
                         location.reload();
                     });
-            }).fail(function () {
+            }).fail(function (e) {
+                console.log(e);
                 swal("Ошибка", "Не удалось изменить статус операции.", "error")
             });
         });
@@ -65,11 +67,6 @@ function changeOperation(text, url) {
 
 $(document).ready(function () {
     $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['ru-RU']);
-    /*$("#date-popover").popover({ html: true, trigger: "manual" });
-    $("#date-popover").hide();
-    $("#date-popover").click(function (e) {
-        $(this).hide();
-    });*/
 
     $('.go-top').click(function () {
         $.scrollTo(0, 1000);
@@ -77,19 +74,31 @@ $(document).ready(function () {
     createBootstrapTable($('#bootstrap-table').attr('click-href'));
     $('#blockUser,#blockAccount').click(function (e) {
         var bt = $(this);
-        $.get(bt.attr('href'), function (str) {
-            swal({
-                title: str,
-                type: "success",
-                showCancelButton: false,
-                confirmButtonText: "Oк",
-                closeOnConfirm: false,
-            },
-                function (conf) {
-                    location.reload();
-                });
-        }).fail(function () {
-            swal("Ошибка", "Не удалось" + bt.html(), "warning")
+        swal({
+            title: "Вы уверены?",
+            text: "Вы точно хотите "+bt.text() + "?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Да",
+            cancelButtonText: "Отмена",
+            closeOnConfirm: false
+        },
+        function () {
+            $.get(bt.attr('href'), function (str) {
+                swal({
+                    title: str,
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonText: "Oк",
+                    closeOnConfirm: false,
+                },
+                    function (conf) {
+                        location.reload();
+                    });
+            }).fail(function () {
+                swal("Ошибка", "Не удалось" + bt.html(), "warning")
+            });
         });
     });
 });

@@ -106,6 +106,7 @@ namespace PaymentSystem.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult Edit(User user, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)

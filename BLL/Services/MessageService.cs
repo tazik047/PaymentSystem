@@ -22,7 +22,7 @@ namespace BLL.Services
         {
             var supports = factory.GetUserRepository(null).Get("Support");
             var rnd = new Random();
-            var supportUser = supports[rnd.Next(supports.Count)];
+            var supportUser = supports[rnd.Next(supports.Count + 1)];
             message.To = supportUser;
             SendMessage(factory, message);
         }

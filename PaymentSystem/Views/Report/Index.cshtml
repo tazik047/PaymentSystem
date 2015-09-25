@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DAO.Model.User>
+@using PaymentSystem.Util;
+@{
+    ViewBag.Title = "Отчет";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    @Html.CreateBootstrapTable(Url.Action("UserOperationsReport", "Json"),
+    new List<ColumnItem>
+    {
+        new ColumnItem("FirstName",Html.DisplayNameFor(model => model.FirstName)),
+        new ColumnItem("LastName",Html.DisplayNameFor(model => model.LastName)),
+        new ColumnItem("Accounts",Html.DisplayNameFor(model => model.Accounts)),
+        new ColumnItem("Sum",new MvcHtmlString("Сумма"))
+    }, Url.Action("Details", "Manage"))
+</div>
+
+<!--
+    User = r.Item1,
+                    Id = r.Item1.Id,
+                    Accounts = prepareArray(r.Item2),
+                    Sum = prepareArray("in: " + r.Item3,"out: " + r.Item4)
+-->
+

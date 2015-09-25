@@ -31,7 +31,7 @@ namespace BLL.Services
                     Id = a.Card.CardId,
                     a.Card.Name,
                     CreationDate = a.CreationDate.ToString("dd.MM.yyyy"),
-                    a.Balance,
+                    Balance = a.Balance + " грн.",
                     a.IsBlocked
                 });
         }
@@ -48,7 +48,7 @@ namespace BLL.Services
 
         private static string FormatAccountName(Account a)
         {
-            return string.Format("{0} - {1} (**{2})", a.Card.Name, a.Balance,
+            return string.Format("{0} - {1} грн. (**{2})", a.Card.Name, a.Balance,
                 a.Card.Number.Substring(a.Card.Number.Length - 4));
         }
 
@@ -63,7 +63,7 @@ namespace BLL.Services
                 FIO = a.User.LastName + " " + a.User.FirstName,
                 a.Card.Name,
                 CreationDate = a.CreationDate.ToString("dd.MM.yyyy"),
-                a.Balance,
+                Balance = a.Balance + " грн.",
             });
         }
 

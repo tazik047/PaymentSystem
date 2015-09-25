@@ -162,8 +162,8 @@ namespace PaymentSystem.Controllers
             try
             {
                 PaymentService.CancelPreparedPayment(id, User.Identity.GetUserId(), _factory);
-                TempData["SuccessMessage"] = "Операция успешно отменена.";
-                return RedirectToAction("PreparedPayments");
+                return Content("Операция успешно отменена.");
+                //return RedirectToAction("PreparedPayments");
             }
             catch (ValidationException e)
             {
@@ -176,7 +176,7 @@ namespace PaymentSystem.Controllers
             try
             {
                 PaymentService.AcceptPreparedPayment(id, User.Identity.GetUserId(), _factory);
-                return Json("Операция успешно подтверждена.", JsonRequestBehavior.AllowGet);
+                return Content("Операция успешно подтверждена.");
             }
             catch (ValidationException)
             {

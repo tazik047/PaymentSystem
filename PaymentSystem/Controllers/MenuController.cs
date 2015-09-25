@@ -27,6 +27,10 @@ namespace PaymentSystem.Controllers
                         ),
                     new MenuItemViewModel("Заблокированные счета",
                         Url.Action("BlockedAccounts", new {Controller = "Card", area = ""}), "fa-ban"),
+                    new MenuItemViewModel("Отчеты","","fa-area-chart",
+                            new MenuItemViewModel("Большие операции",
+                                Url.Action("Index", new {Controller = "Report", area = ""}),"")
+                        ),
                 };
             }
             else if (User.IsInRole("Support"))
@@ -48,7 +52,7 @@ namespace PaymentSystem.Controllers
                     new MenuItemViewModel("Главная", Url.Action("Index", new {Controller = "Home", area = ""}),
                         "fa-home"),
                     new MenuItemViewModel("Операции", "", "fa-dashboard",
-                        new MenuItemViewModel("Пополненить счет",
+                        new MenuItemViewModel("Пополнить счет",
                             Url.Action("CreateReplenishment", new {Controller = "Operation", area = ""}), ""),
                         new MenuItemViewModel("Банковский платеж",
                             Url.Action("CreateBankOperation", new {Controller = "Operation", area = ""}), ""),
@@ -79,7 +83,7 @@ namespace PaymentSystem.Controllers
                             Url.Action("Outbox", new {Controller = "Message", area = ""}), ""),
                         new MenuItemViewModel("Новое сообщение",
                             Url.Action("NewMessage", new {Controller = "Message", area = ""}), "")
-                        ),
+                        ),                        
                 };
             }
             return PartialView("_Menu", items);

@@ -186,6 +186,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OperationController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Filters\UserActivationChecker.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +269,7 @@
     <Content Include="Views\Message\Details.cshtml" />
     <Content Include="Views\Message\Answer.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

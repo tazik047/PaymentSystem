@@ -23,6 +23,7 @@ namespace DAO.Model
         public byte[] ImageBytes { get; set; }
         public string ImgMimeType { get; set; }
         
+        [DisplayName("Счета")]
         public virtual ICollection<Account> Accounts { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

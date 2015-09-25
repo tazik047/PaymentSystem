@@ -27,7 +27,7 @@ namespace BLL.Services
             return account.Operations.Select(o => new
             {
                 OperationDate = o.OperationDate.ToString("dd.MM.yyyy"),
-                o.Amount,
+                Amount = o.Amount + " грн.",
                 Type = o.Type.GetDescription(),
                 Id = o.OperationId
             }).ToList();
@@ -45,7 +45,7 @@ namespace BLL.Services
             {
                 o.Account.Card.Name,
                 OperationDate = o.OperationDate.ToString("dd.MM.yyyy"),
-                o.Amount,
+                Amount = o.Amount + " грн.",
                 Type = o.Type.GetDescription(),
                 Id = o.OperationId
             });

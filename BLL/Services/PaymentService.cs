@@ -46,6 +46,8 @@ namespace BLL.Services
                 throw new ValidationException("Нельзя отменить чужую операцию");
             if (operation.Type != OperationType.PreparedPayment)
                 throw new ValidationException("Невозможно отменить выполненный платеж.");
+            if (operation.Account.IsBlocked)
+                throw new ValidationException("Ваша карта заблокирована.");
             account.Balance += operation.Amount;
             account.Operations.Remove(operation);
             factory.OperationRepository.Delete(operation.OperationId);
@@ -79,6 +81,8 @@ namespace BLL.Services
                 throw new ValidationException("Нельзя подтвердить чужую операцию");
             if (operation.Type != OperationType.PreparedPayment)
                 throw new ValidationException("Этот платеж невозможно подтвердить.");
+            if (operation.Account.IsBlocked)
+                throw new ValidationException("Ваша карта заблокирована.");
             operation.Type = OperationType.Paymnet;
             CheckCardOperation(factory, userId, operation);
             factory.OperationRepository.Edit(operation);
@@ -109,7 +113,7 @@ namespace BLL.Services
                 throw new ValidationException("Нельзя использовать данный счет.");
             if (operation.Amount > account.Balance)
                 throw new ValidationException("Сумма платежа больше, чем баланс на счету.");
-            operation.OperationDate = DateTime.Now;
+            operation.OperationDate = DateTime.UtcNow;
             if(operation.Type!= OperationType.PreparedPayment)
                 CheckCardOperation(factory, userId, operation);
             account.Balance -= operation.Amount;

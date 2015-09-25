@@ -67,6 +67,7 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\OperationService.cs" />
     <Compile Include="Services\PaymentService.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ValidationException.cs" />

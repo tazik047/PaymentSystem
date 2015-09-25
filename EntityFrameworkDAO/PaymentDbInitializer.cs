@@ -43,10 +43,17 @@ namespace EntityFrameworkDAO
                 },
                 new User
                 {
-                    Email = "support@payment.com", 
-                    UserName = "support@payment.com",
-                    FirstName = "Support",
-                    LastName = "Support"
+                    Email = "support1@payment.com", 
+                    UserName = "support1@payment.com",
+                    FirstName = "Support1",
+                    LastName = "Support1"
+                },
+                new User
+                {
+                    Email = "support2@payment.com", 
+                    UserName = "support2@payment.com",
+                    FirstName = "Support2",
+                    LastName = "Support2"
                 },
                 new User
                 {
@@ -54,7 +61,7 @@ namespace EntityFrameworkDAO
                     UserName = "stas249501@gmail.com",
                     FirstName = "Станислав",
                     LastName = "Задорожний",
-                    PhoneNumber = "+38(095)312-38-38"
+                    PhoneNumber = "(095) 312-38-38"
                 },
                 new User
                 {
@@ -62,7 +69,7 @@ namespace EntityFrameworkDAO
                     UserName = "test@test.com",
                     FirstName = "ТестИмя",
                     LastName = "ТестФамилия",
-                    PhoneNumber = "+38(093)973-79-89"
+                    PhoneNumber = "(093) 973-79-89"
                 }
             };
             foreach (var user in users)
@@ -76,10 +83,11 @@ namespace EntityFrameworkDAO
             // Set roles to main users.
             CheckResult(userManager.AddToRole(users[0].Id, "Admin"));
             CheckResult(userManager.AddToRole(users[1].Id, "Support"));
+            CheckResult(userManager.AddToRole(users[2].Id, "Support"));
             context.SaveChanges();
 
             // Set roles to other users.
-            for (int i = 2; i < users.Length; i++)
+            for (int i = 3; i < users.Length; i++)
                 CheckResult(userManager.AddToRole(users[i].Id, "User"));
             context.SaveChanges();
 
@@ -160,7 +168,6 @@ namespace EntityFrameworkDAO
             if (!result.Succeeded)
             {
                 throw new Exception("False");
-                // todo: create exception here
             }
         }
     }
