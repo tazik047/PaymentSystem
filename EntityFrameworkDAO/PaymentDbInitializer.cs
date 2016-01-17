@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace EntityFrameworkDAO
 {
-    class PaymentDbInitializer : DropCreateDatabaseIfModelChanges<PaymentDbContext>
+    class PaymentDbInitializer : DropCreateDatabaseAlways<PaymentDbContext>
     {
 
         protected override void Seed(PaymentDbContext context)
